@@ -1,7 +1,13 @@
-import Header from "@/components/header/Header";
-
+import Login from "./screens/login/Login";
 export default function Home() {
-  return (
-    <Header />
-  );
-}
+  return <Login />;
+  // (
+  //   <>
+  //       <Header />
+  //       <SideBar />
+  //       <Main />
+  //   </>
+  // );
+} 
+// localhost/register
+// localhost/home
