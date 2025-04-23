@@ -10,7 +10,7 @@ const Logo: React.FC = () => {
 
   return (
     <div className="d-flex align-items-center justify-content-between">
-      <a href="/" className="logo d-flex align-items-center">
+      <a href="/home" className="logo d-flex align-items-center">
         {/* <img src="/logo.png" alt="Logo" /> */}
         <span className="d-none d-lg-block">MyChamba</span>
       </a>

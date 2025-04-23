@@ -2,15 +2,16 @@
 
 import React from "react";
 import './styles/main.css';
-import PageTittle from "./pageTittle/PageTittle";
-import Home from "./Home";
+
+import PageTittle from "../home/pageTittle/PageTittle";
+import Profile from "./Profile";
 
 
 const Main: React.FC = () => {
   return (
     <main id="main" className="main">
-      <PageTittle page="Home" />
-      <Home />
+      <PageTittle page="Perfil"/>
+      <Profile />
     </main>
   );
 };
