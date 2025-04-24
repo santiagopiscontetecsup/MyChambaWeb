@@ -7,6 +7,8 @@ export interface UserProfile {
   description: string;
   profileImage: string;
   backgroundImage: string;
+  industria: string;
+  redes:string
 }
 
 export const userProfile: UserProfile = {
@@ -16,4 +18,6 @@ export const userProfile: UserProfile = {
     "Apasionado por la tecnología y el desarrollo web. Siempre en busca de nuevos retos y aprendizajes para mejorar mis habilidades.",
   profileImage: avatar.src,
   backgroundImage: background.src,
+  industria:"Diseño digital y desarrollo de productos interactivos",
+  redes:"Correo: lucas.fernandez@example.com"
 };
