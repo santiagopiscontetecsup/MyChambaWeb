@@ -56,7 +56,7 @@ const SobreMi: React.FC = () => {
         idSector: Number(idSector),
       },
     };
-
+    
     try {
       setLoading(true);
       console.log("Payload a enviar:", payload);

@@ -22,7 +22,6 @@ export const registerEmpresa = async (
     const response = await api.post("/api/Usuario/register/empresa", payload);
     return response.data;
   } catch (error: any) {
-    // Muestra detalle del error devuelto por el backend
     console.error("registerEmpresa error:", error.response?.data || error.message);
     throw error;
   }
