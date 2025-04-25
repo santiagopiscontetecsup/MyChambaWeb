@@ -1,6 +1,8 @@
-export type NavItem = {
+export interface NavItem {
     id: number;
     name: string;
     icon: string;
-    category: 'main' | 'others'; 
-};
+    category: "main" | "others";
+    path: string;
+  }
+  
