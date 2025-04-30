@@ -1,0 +1,56 @@
+.notifications-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .notification-group {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 16px;
+  }
+  
+  .group-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .notification-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+  }
+  
+  .avatar.placeholder {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  
+  .notification-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .message {
+    margin: 0;
+  }
+  
+  .time {
+    font-size: 0.85rem;
+    color: #888;
+  }
+  
