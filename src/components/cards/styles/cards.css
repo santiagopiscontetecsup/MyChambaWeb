@@ -1,0 +1,40 @@
+   .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+  
+  .avatar-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .avatar-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  .avatar-sm {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #ccc;
+  }
+  
+  .more-count {
+    font-size: 0.75rem;
+    background: #e0e0e0;
+    border-radius: 999px;
+    padding: 0 6px;
+    margin-left: 4px;
+    line-height: 24px;
+  }
+  

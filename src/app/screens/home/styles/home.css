@@ -1,0 +1,28 @@
+/* Evita cualquier overflow horizontal */
+.home.section.container,
+.home.section.container-fluid {
+  overflow-x: hidden;
+}
+
+.home.section {
+    overflow: visible; /* Asegura que el contenido se muestre completamente */
+}
+
+/* Ajusta márgenes de los rows para evitar scroll horizontal */
+.home .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Añade padding interno a las columnas para compensar la ausencia de margen negativo */
+.home .row > div[class*="col-"] {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* Asegura que las cards no se desborden */
+.home .card {
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
