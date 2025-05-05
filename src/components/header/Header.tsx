@@ -13,7 +13,7 @@ const Header: React.FC = () => {
       {/* {logo} */}
       <Logo />
       {/* {Search} */}
-      <SearchBar />
+      {/* <SearchBar /> */}
       {/* {nav} */}
       <Nav />
     </header>

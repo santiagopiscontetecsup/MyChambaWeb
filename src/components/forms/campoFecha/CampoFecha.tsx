@@ -1,38 +1,30 @@
-import React, { useState } from 'react';
-import CampoFecha from './CampoFecha'; 
-import Input from '../input/Input';
+import React from 'react';
+import InputText from '../input/inputText/InputText';
 
-interface FechaProps {
-  value: string; // Valor de la fecha
-  onChange: (newFecha: string) => void; // Función para manejar el cambio de fecha
+interface CampoFechaProps {
+  label: string;
+  value: string;
+  onChange: (newFecha: string) => void;
+  error?: string; // Propiedad para el mensaje de error
+  helperText?: string; // Propiedad para el texto de ayuda
+  className?: string;
 }
 
-
-
-const App: React.FC<FechaProps> = ({value, onChange}) => {
-  const [fechaLimite, setFechaLimite] = useState<string>('2025-12-31');
-
-  const handleFechaChange = (newFecha: string) => {
-    setFechaLimite(newFecha);
-  };
-
+const CampoFecha: React.FC<CampoFechaProps> = ({ label, value, onChange, error, helperText, className }) => {
   return (
-    <div>
-      <h1>Formulario de Fecha</h1>
-      <CampoFecha
-        value={fechaLimite} 
-        onChange={handleFechaChange}
+    <div className={`campo-fecha ${className || ''}`}>
+      <InputText
+        label={label}
+        value={value}
+        onChange={onChange}
+        type="date" // Tipo de input "date"
       />
-
-      {/* <Input 
-        label="¿Activar algo?" 
-        checked={true} 
-        onChange={(val) => console.log("Switch cambiado a", val)} 
-      /> */}
-
+      {/* Mostrar mensaje de error si existe */}
+      {error && <p className="error-text">{error}</p>}
+      {/* Mostrar texto de ayuda si existe */}
+      {helperText && !error && <p className="helper-text">{helperText}</p>}
     </div>
   );
-
 };
 
-export default App;
+export default CampoFecha;

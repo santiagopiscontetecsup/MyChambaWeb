@@ -1,0 +1,82 @@
+/* Estilo general para centrar la tarjeta */
+.project-card {
+  max-width: 600px; /* Ancho máximo de la tarjeta */
+  margin: 50px auto; /* Centrar horizontalmente y agregar espacio superior */
+  padding: 20px; /* Espaciado interno */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  text-align: center; /* Centrar texto */
+  font-family: Arial, sans-serif; /* Fuente */
+}
+
+/* Título del proyecto */
+.project-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+/* Descripción del proyecto */
+.project-description {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+/* Detalles del proyecto */
+.project-details {
+  margin-top: 20px;
+  text-align: left; /* Alinear texto a la izquierda */
+}
+
+.detail {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-weight: bold;
+  color: #555555;
+}
+
+.detail p {
+  margin: 0;
+  color: #333333;
+}
+
+/* Botones */
+.button-group {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espaciado entre botones */
+}
+
+.edit-button,
+.publish-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.publish-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.publish-button:hover {
+  background-color: #1e7e34;
+}
