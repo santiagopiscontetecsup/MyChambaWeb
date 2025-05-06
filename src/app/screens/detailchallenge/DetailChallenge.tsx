@@ -1,103 +1,88 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Proyecto } from "@/components/forms/ChallengeForm";
 import './styles/DetailChallenge.css';
+import { getUserFromToken } from '@/services/auth/authService';
 
 const DetailChallenge: React.FC = () => {
-  const [proyecto, setProyecto] = useState<Proyecto | null>(null);
+  const [proyecto, setProyecto] = useState<any>(null);
   const router = useRouter();
 
   useEffect(() => {
     const storedData = localStorage.getItem("formProyecto");
     if (storedData) {
-        const parsedData: Proyecto = JSON.parse(storedData);
-        console.log("Proyecto cargado desde localStorage:", parsedData);
-        setProyecto(parsedData);
+      const parsedData = JSON.parse(storedData);
+      console.log("Proyecto cargado desde localStorage:", parsedData);
+      setProyecto(parsedData);
     } else {
-        console.log("No se encontró ningún proyecto en localStorage.");
+      console.log("No se encontró ningún proyecto en localStorage.");
     }
-}, []);
+  }, []);
 
   if (!proyecto) {
-    return <div>No se pudo cargar el proyecto.</div>; // Mensaje de error si no hay proyecto
+    return <div>No se pudo cargar el proyecto.</div>;
   }
 
   const handleEdit = () => {
-    console.log("Redirigiendo a /postchallenge con el proyecto:", proyecto);
-    localStorage.setItem("formProyecto", JSON.stringify(proyecto)); // Guarda el proyecto actual en localStorage
-    router.push("/postchallenge"); // Redirige a la vista de postchallenge
+    localStorage.setItem("formProyecto", JSON.stringify(proyecto));
+    router.push("/postchallenge");
   };
 
-  const handlePublish = () => {
-    console.log("handlePublish ejecutado con el proyecto:", proyecto);
+  const handlePublish = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("No hay token disponible.");
+        return;
+      }
 
-    // Obtener la lista de proyectos publicados desde localStorage
-    const storedProjects = localStorage.getItem("proyectosPublicados");
-    const proyectosPublicados = storedProjects ? JSON.parse(storedProjects) : [];
+      // Obtener idEmpresa desde el token usando el servicio
+      const user = getUserFromToken();
+      if (!user || !user.idEmpresa) {
+        alert("No se pudo obtener el ID de la empresa.");
+        return;
+      }
 
-    // Verifica si el proyecto ya existe en la lista
-    const proyectoExiste = proyectosPublicados.some(
-      (p: Proyecto) => p.id === proyecto.id
-    );
+      // Crear el objeto de envío al backend
+      const proyectoParaEnviar = {
+        ...proyecto,
+        idEmpresa: user.idEmpresa,
+      };
 
-    if (proyectoExiste) {
-      alert("El proyecto ya está publicado.");
-      router.push("/home");
-      return;
+      const response = await fetch("https://8e0f-2800-200-d360-1b-9c50-e224-f908-b74.ngrok-free.app/api/Proyectos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // ✅ ESTA ES LA CORRECCIÓN CLAVE
+        },
+        body: JSON.stringify(proyectoParaEnviar),
+      });
+
+      if (!response.ok) throw new Error("Error al publicar el proyecto");
+
+      alert("Proyecto publicado con éxito en el servidor");
+      localStorage.removeItem("formProyecto");
+      router.push("/proyectos");
+
+    } catch (error) {
+      console.error("Error en la publicación del proyecto:", error);
+      alert("Ocurrió un error al publicar el proyecto.");
     }
-
-    // Agregar el proyecto al inicio de la lista
-    proyectosPublicados.unshift(proyecto);
-    localStorage.setItem("proyectosPublicados", JSON.stringify(proyectosPublicados));
-
-    // Eliminar los datos del formulario de localStorage
-    localStorage.removeItem("formProyecto");
-
-    alert("Proyecto publicado con éxito");
-    router.push("/home"); // Redirigir a la página principal
   };
+
+  const habilidades = Array.isArray(proyecto.idHabilidades)
+    ? proyecto.idHabilidades.join(', ')
+    : 'No hay habilidades';
 
   return (
-    <div className="project-card">
-      <h2 className="project-title">{proyecto.title}</h2>
-      <p className="project-description">{proyecto.shortDescription}</p>
+    <div className="detalle-container">
+      <h1>{proyecto.titulo}</h1>
+      <p><strong>Descripción:</strong> {proyecto.descripcion}</p>
+      <p><strong>Fecha Límite:</strong> {proyecto.fechaLimite}</p>
+      <p><strong>Recompensa:</strong> {proyecto.tipoRecompensa === 1 ? 'Sí' : 'No'}</p>
+      <p><strong>ID Habilidades:</strong> {habilidades}</p>
 
-      <div className="project-details">
-        <div className="detail">
-          <p className="label">Requisitos:</p>
-          <p>{proyecto.requirements}</p>
-        </div>
-        <div className="detail">
-          <p className="label">Objetivos:</p>
-          <p>{proyecto.objectives}</p>
-        </div>
-        <div className="detail">
-          <p className="label">Fecha límite:</p>
-          <p>{proyecto.deadline}</p>
-        </div>
-        <div className="detail">
-          <p className="label">Recompensa:</p>
-          <p>{proyecto.reward ? "Sí" : "No"}</p>
-        </div>
-        <div className="detail">
-          <p className="label">Certificado:</p>
-          <p>{proyecto.certificate ? "Sí" : "No"}</p>
-        </div>
-        <div className="detail">
-          <p className="label">Plazo de entrega:</p>
-          <p>{proyecto.duration}</p>
-        </div>
-      </div>
-
-      {/* Botones de acción */}
-      <div className="button-group">
-        <button className="edit-button" onClick={handleEdit}>
-          Editar
-        </button>
-        <button className="publish-button" onClick={handlePublish}>
-          Publicar
-        </button>
-      </div>
+      <button onClick={handleEdit}>Editar</button>
+      <button onClick={handlePublish}>Publicar</button>
     </div>
   );
 };

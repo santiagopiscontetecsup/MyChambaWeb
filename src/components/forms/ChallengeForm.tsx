@@ -1,188 +1,112 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/ChallengeForm.css';
 import CampoSwitch from '@/components/forms/campoSwitch/CampoSwitch';
 import CampoFecha from '@/components/forms/campoFecha/CampoFecha';
 import InputText from '@/components/forms/input/inputText/InputText';
 import { useRouter } from "next/navigation";
+import { getUserFromToken } from '@/services/auth/authService'; // Importa la función corregida
 
-export interface Proyecto {
-  id: string;
-  title: string;
-  shortDescription: string;
-  technologies: string[];
-  date: string;
-  members: number;
-  logo: string;
-
-  description: string;
-  requirements: string;
-  objectives: string;
-  deadline: string;
-  reward: boolean;
-  certificate: boolean;
-  duration: string;
-}
-
-interface ChallengeFormProps {
-  onSubmit: (proyecto: Proyecto) => void;
-  initialData?: Proyecto;
-}
-
-const ChallengeForm: React.FC<ChallengeFormProps> = ({ onSubmit, initialData }) => {
+const ChallengeForm: React.FC = () => {
   const router = useRouter();
 
-  const [nombreProyecto, setNombreProyecto] = useState(initialData?.title || '');
-  const [descripcion, setDescripcion] = useState(initialData?.shortDescription || '');
-  const [requisitos, setRequisitos] = useState(initialData?.requirements || '');
-  const [objetivos, setObjetivos] = useState(initialData?.objectives || '');
-  const [fechaLimite, setFechaLimite] = useState(initialData?.deadline || '');
-  const [recompensa, setRecompensa] = useState(initialData?.reward ?? false);
-  const [certificado, setCertificado] = useState(initialData?.certificate ?? false);
-  const [plazo, setPlazo] = useState(initialData?.duration || '');
+  const [titulo, setTitulo] = useState('');
+  const [descripcion, setDescripcion] = useState('');
+  const [fechaLimite, setFechaLimite] = useState('');
+  const [tipoRecompensa, setTipoRecompensa] = useState(false);
+  const [habilidades, setHabilidades] = useState('');
 
-  // Estado para los errores de validación
-  const [errors, setErrors] = useState({
-    nombreProyecto: '',
-    descripcion: '',
-    requisitos: '',
-    objetivos: '',
-    fechaLimite: '',
-    plazo: '',
-    certificado: '',
-  });
-
-  const resetForm = () => {
-    setNombreProyecto('');
-    setDescripcion('');
-    setRequisitos('');
-    setObjetivos('');
-    setFechaLimite('');
-    setRecompensa(false);
-    setCertificado(false);
-    setPlazo('');
-  };
-
-  // Cargar datos persistidos desde localStorage al montar el componente
   useEffect(() => {
-    const storedData = localStorage.getItem('formProyecto');
+    const storedData = localStorage.getItem("formProyecto");
     if (storedData) {
-      const parsedData: Proyecto = JSON.parse(storedData);
-      setNombreProyecto(parsedData.title);
-      setDescripcion(parsedData.shortDescription);
-      setRequisitos(parsedData.requirements);
-      setObjetivos(parsedData.objectives);
-      setFechaLimite(parsedData.deadline);
-      setRecompensa(parsedData.reward ?? false);
-      setCertificado(parsedData.certificate ?? false);
-      setPlazo(parsedData.duration);
+      const parsedData = JSON.parse(storedData);
+      setTitulo(parsedData.titulo || '');
+      setDescripcion(parsedData.descripcion || '');
+      setFechaLimite(parsedData.fechaLimite || '');
+      setTipoRecompensa(parsedData.tipoRecompensa === 1);
+      setHabilidades(
+        Array.isArray(parsedData.idHabilidades)
+          ? parsedData.idHabilidades.join(', ')
+          : ''
+      );
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-    // Validar que la fecha sea válida
-    const isFechaValida = !isNaN(Date.parse(fechaLimite));
-    const isPlazoValido = /^\d+$/.test(plazo); // Verifica que el plazo sea un número entero positivo
-  
-    const newErrors = {
-      nombreProyecto: nombreProyecto ? '' : 'El nombre del proyecto es obligatorio.',
-      descripcion: descripcion ? '' : 'La descripción es obligatoria.',
-      requisitos: requisitos ? '' : 'Los requisitos son obligatorios.',
-      objetivos: objetivos ? '' : 'Los objetivos son obligatorios.',
-      fechaLimite: isFechaValida ? '' : 'La fecha límite debe ser válida.',
-      plazo: isPlazoValido ? '' : 'El plazo debe ser un número en días.',
-      certificado: certificado ? '' : 'El certificado es obligatorio.',
-    };
-  
-    setErrors(newErrors);
-  
-    const hasErrors = Object.values(newErrors).some((error) => error !== '');
-    if (!hasErrors) {
-      const newProyecto: Proyecto = {
-        id: initialData?.id || crypto.randomUUID(),
-        title: nombreProyecto,
-        shortDescription: descripcion,
-        requirements: requisitos,
-        objectives: objetivos,
-        deadline: fechaLimite,
-        reward: recompensa,
-        certificate: certificado,
-        duration: plazo,
-        members: 0,
-        logo: '',
-        date: new Date().toISOString(), // Fecha actual
-        technologies: [],
-        description: descripcion,
-      };
-  
-      console.log("Guardando proyecto en localStorage:", newProyecto);
-        localStorage.setItem('formProyecto', JSON.stringify(newProyecto));
-        resetForm();
-        router.push('/detailchallenge');
+
+    // Validación básica
+    if (!titulo.trim() || !descripcion.trim() || !fechaLimite.trim() || !habilidades.trim()) {
+      alert("Por favor completa todos los campos obligatorios.");
+      return;
     }
+
+    const user = getUserFromToken();
+    console.log("User desde el token:", user);
+    if (!user || !user.idEmpresa) {
+      console.error("No se pudo recuperar el idEmpresa del token.");
+      alert("Error al recuperar datos del usuario. Intenta iniciar sesión nuevamente.");
+      return;
+    }
+
+    const data = {
+      idEmpresa: user.idEmpresa,
+      titulo: titulo.trim(),
+      descripcion: descripcion.trim(),
+      fechaLimite: new Date(fechaLimite).toISOString(),
+      tipoRecompensa: tipoRecompensa ? 1 : 0,
+      idHabilidades: habilidades
+        .split(',')
+        .map(id => id.trim())
+        .filter(id => id !== '')
+        .map(id => parseInt(id)),
+    };
+
+    console.log("Datos listos para guardar:", data);
+
+    // Guardar en localStorage para la vista de confirmación
+    localStorage.setItem('formProyecto', JSON.stringify(data));
+
+    // Redirigir a vista de detalle
+    router.push('/detailchallenge');
   };
 
-  // Renderizado del formulario
   return (
-    <form onSubmit={handleSubmit} className="challenge-form">
+    <form className="challenge-form" onSubmit={handleSubmit}>
+      <h2>Crear Proyecto</h2>
+
       <InputText
-        label="Nombre del proyecto"
-        value={nombreProyecto}
-        onChange={setNombreProyecto}
-        error={errors.nombreProyecto}
-        helperText={errors.nombreProyecto}
+        label="Título del proyecto"
+        value={titulo}
+        onChange={setTitulo}
       />
+
       <InputText
         label="Descripción"
         value={descripcion}
         onChange={setDescripcion}
-        error={errors.descripcion}
-        helperText={errors.descripcion}
       />
-      <InputText
-        label="Requerimientos"
-        value={requisitos}
-        onChange={setRequisitos}
-        error={errors.requisitos}
-        helperText={errors.requisitos}
-      />
-      <InputText
-        label="Objetivos"
-        value={objetivos}
-        onChange={setObjetivos}
-        error={errors.objetivos}
-        helperText={errors.objetivos}
-      />
+
       <CampoFecha
         label="Fecha límite"
         value={fechaLimite}
-        onChange={setFechaLimite}
-        error={errors.fechaLimite}
-        helperText="Por favor, selecciona una fecha válida."
+        onChange={(date: string) => setFechaLimite(date)}
       />
-      <InputText
-        label="Plazo"
-        value={plazo}
-        onChange={setPlazo}
-        error={errors.plazo}
-        helperText={errors.plazo}
-      />
+
       <CampoSwitch
         label="¿Tiene recompensa?"
-        checked={recompensa}
-        onChange={setRecompensa}
+        checked={tipoRecompensa}
+        onChange={(checked: boolean) => setTipoRecompensa(checked)}
       />
-      <CampoSwitch
-        label="¿Entrega certificado?"
-        checked={certificado}
-        onChange={setCertificado}
-      />
-      {errors.certificado && <p className="error-text">{errors.certificado}</p>}
 
-      <button type="submit">Continuar</button>
+      <InputText
+        label="ID de habilidades (separados por coma)"
+        value={habilidades}
+        onChange={setHabilidades}
+      />
+
+      <button type="submit" className="btn-submit">Enviar Proyecto</button>
     </form>
   );
 };
