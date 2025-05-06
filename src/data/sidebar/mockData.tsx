@@ -14,7 +14,7 @@ export const navList: NavItem[] = [
     name: "Mis Proyectos",
     icon: "bi bi-folder",
     category: "main",
-    path: "/projects",
+    path: "/myprojects",
   },
   {
     id: 3,
