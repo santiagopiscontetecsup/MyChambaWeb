@@ -15,9 +15,9 @@ const Card: React.FC<Props> = ({ card }) => {
       <div className="card h-100 shadow-sm card-hover">
         <div className="card-body d-flex flex-column">
           <div className="d-flex align-items-center mb-3">
-            <img src={avatar.src} alt="Logo" className="avatar-logo me-2" />
+            <img src={card.logo || avatar.src} alt="Logo" className="avatar-logo me-2" />
             <div>
-              <h5 className="card-title mb-0">{card.title}</h5>
+              <h5 className="card-title mb-0">{card.title || "Sin título"}</h5>
               <small className="text-muted">Empresa: PisconteDev</small>
             </div>
           </div>
@@ -25,39 +25,38 @@ const Card: React.FC<Props> = ({ card }) => {
           <hr className="my-2" />
 
           <p className="text-muted mb-1">
-            <small>📅 Publicado: {card.date}</small>
+            <small>📅 Publicado: {card.date || "Fecha no disponible"}</small>
           </p>
 
-          <p className="card-text">{card.shortDescription}</p>
+          <p className="card-text">{card.shortDescription || "Sin descripción"}</p>
 
           <div className="tech-list mb-3">
-            {card.technologies.map((tech, index) => (
-              <span key={index} className="badge bg-light text-dark border me-1 mb-1">
-                {tech}
-              </span>
-            ))}
+            {card.technologies && card.technologies.length > 0 ? (
+              card.technologies.map((tech, index) => (
+                <span key={index} className="badge bg-light text-dark border me-1 mb-1">
+                  {tech}
+                </span>
+              ))
+            ) : (
+              <span className="text-muted">Sin tecnologías</span>
+            )}
           </div>
 
           <div className="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
             <div className="d-flex align-items-center">
               <i className="bi bi-people-fill me-1 text-primary"></i>
-              <div className="avatar-group">
-                <img src={avatar.src} alt="User" className="avatar-sm" />
-                <img src={avatar.src} alt="User" className="avatar-sm" />
-                <img src={avatar.src} alt="User" className="avatar-sm" />
-                <span className="more-count">+6</span>
-              </div>
+              <span>{card.members || 0} miembros</span>
             </div>
             <div className="d-flex gap-2">
-                <button className="btn p-0 border-0 text-secondary" title="Ver">
-                    <i className="bi bi-eye-fill"></i>
-                </button>
-                <button className="btn p-0 border-0 text-secondary" title="Editar">
-                    <i className="bi bi-pencil-fill"></i>
-                </button>
-                <button className="btn p-0 border-0 text-secondary" title="Eliminar">
-                    <i className="bi bi-trash-fill"></i>
-                </button> 
+              <button className="btn p-0 border-0 text-secondary" title="Ver">
+                <i className="bi bi-eye-fill"></i>
+              </button>
+              <button className="btn p-0 border-0 text-secondary" title="Editar">
+                <i className="bi bi-pencil-fill"></i>
+              </button>
+              <button className="btn p-0 border-0 text-secondary" title="Eliminar">
+                <i className="bi bi-trash-fill"></i>
+              </button>
             </div>
           </div>
         </div>
