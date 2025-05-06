@@ -61,7 +61,7 @@ const DetailChallenge: React.FC = () => {
 
       alert("Proyecto publicado con éxito en el servidor");
       localStorage.removeItem("formProyecto");
-      router.push("/proyectos");
+      router.push("/myprojects");
 
     } catch (error) {
       console.error("Error en la publicación del proyecto:", error);
