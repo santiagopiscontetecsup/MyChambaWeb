@@ -19,7 +19,7 @@ export const registerEmpresa = async (
   payload: RegisterEmpresaDTO
 ): Promise<any> => {
   try {
-    const response = await api.post("/api/Usuario/register/empresa", payload);
+    const response = await api.post("/api/UserRegister/register/empresa", payload);
     return response.data;
   } catch (error: any) {
     console.error("registerEmpresa error:", error.response?.data || error.message);

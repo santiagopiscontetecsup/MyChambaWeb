@@ -6,7 +6,7 @@ import Card from "@/components/cards/Cards";
 import { Proyecto } from "@/models/project";
 
 interface HomeProps {
-  proyectosIniciales: Proyecto[]; // Recibe los proyectos iniciales como props
+  proyectosIniciales: Proyecto[]; 
 }
 
 const Home: React.FC<HomeProps> = ({ proyectosIniciales }) => {
@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = ({ proyectosIniciales }) => {
       console.log("Proyectos cargados:", proyectos.map((p: Proyecto) => ({ id: p.id, title: p.title })));
       const uniqueProyectos = proyectos.map((proyecto: Proyecto, index: number) => ({
         ...proyecto,
-        id: proyecto.id || `unique-id-${index}`, // Genera un id único si falta
+        id: proyecto.id || `unique-id-${index}`,
       }));
       localStorage.setItem('proyectosPublicados', JSON.stringify(uniqueProyectos));
       setProyectos(uniqueProyectos);
@@ -36,7 +36,7 @@ const Home: React.FC<HomeProps> = ({ proyectosIniciales }) => {
       <div className="row mt-5">
         {proyectos.map((card) => (
           <Card
-            key={`${card.id}-${card.title}-${Math.random()}`} // Combina id, title y un valor aleatorio
+            key={`${card.id}-${card.title}-${Math.random()}`}
             card={{
               id: Number(card.id),
               title: card.title,
