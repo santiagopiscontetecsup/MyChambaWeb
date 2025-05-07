@@ -48,7 +48,7 @@ const DetailChallenge: React.FC = () => {
         idEmpresa: user.idEmpresa,
       };
 
-      const response = await fetch("https://8e0f-2800-200-d360-1b-9c50-e224-f908-b74.ngrok-free.app/api/Proyectos", {
+      const response = await fetch("http://44.201.117.88:5227/api/Proyectos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
