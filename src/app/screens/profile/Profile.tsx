@@ -3,7 +3,7 @@
 import React from "react";
 import { userProfile } from "@/data/profile/mockData";
 import { useRouter } from "next/navigation";
-import "./styles/Profile.css"; 
+import "./styles/profile.css"; 
 import Card from "@/components/cards/Cards";
 import { projectList } from "@/data/projects/mockData";
 
