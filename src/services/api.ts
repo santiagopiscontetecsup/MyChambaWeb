@@ -1,9 +1,12 @@
 import axios from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const NEXT_PUBLIC_API_BASE_URL="http://44.201.117.88:5227/"
+
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || NEXT_PUBLIC_API_BASE_URL;
 
 const api = axios.create({
-  baseURL: "https://8e0f-2800-200-d360-1b-9c50-e224-f908-b74.ngrok-free.app",
+  baseURL: API_BASE_URL, 
   headers: {
     "Content-Type": "application/json",
   },
