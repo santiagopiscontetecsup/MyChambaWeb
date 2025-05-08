@@ -8,6 +8,7 @@ interface CampoFechaProps {
   error?: string; // Propiedad para el mensaje de error
   helperText?: string; // Propiedad para el texto de ayuda
   className?: string;
+  id: string;
 }
 
 const CampoFecha: React.FC<CampoFechaProps> = ({ label, value, onChange, error, helperText, className }) => {
@@ -18,11 +19,10 @@ const CampoFecha: React.FC<CampoFechaProps> = ({ label, value, onChange, error, 
         value={value}
         onChange={onChange}
         type="date" // Tipo de input "date"
+        className={error ? 'input-error' : ''} // Aplica la clase de error si existe
+        helperText={helperText}
+        error={error} // Pasa el mensaje de error
       />
-      {/* Mostrar mensaje de error si existe */}
-      {error && <p className="error-text">{error}</p>}
-      {/* Mostrar texto de ayuda si existe */}
-      {helperText && !error && <p className="helper-text">{helperText}</p>}
     </div>
   );
 };

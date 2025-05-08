@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import './styles/InputText.css';  // Importa el archivo CSS
+import './styles/InputText.css'; // Importa el archivo CSS
 
 interface InputTextoProps {
   label: string;
@@ -10,9 +10,9 @@ interface InputTextoProps {
   placeholder?: string;
   type?: string;
   id?: string;
-  className?: string;
-  error?: string; // Recibe el error
-  helperText?: string; // Recibe el texto de ayuda o mensaje de error
+  className?: string; // Clase personalizada, incluyendo errores
+  error?: string; // Recibe el mensaje de error
+  helperText?: string; // Recibe el texto de ayuda
 }
 
 const InputText: React.FC<InputTextoProps> = ({
@@ -22,23 +22,23 @@ const InputText: React.FC<InputTextoProps> = ({
   placeholder,
   type = 'text',
   id,
+  className,
   error,
-  helperText
+  helperText,
 }) => {
   return (
-    <div className="mb-4">
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <div className="input-text-container">
+      {label && <label htmlFor={id} className="input-text-label">{label}</label>}
       <input
         id={id}
         type={type}
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`input-text ${error ? 'input-text-error' : ''}`} // Aplica la clase de error si hay un error
+        className={`input-text ${className || ''}`} // Aplica la clase personalizada
       />
-      {helperText && error && (
-        <p className="input-text-error-message">{helperText}</p> // Muestra el mensaje de error
-      )}
+      {error && <p className="input-text-error-message">{error}</p>} {/* Muestra el mensaje de error */}
+      {!error && helperText && <p className="input-text-helper">{helperText}</p>} {/* Muestra texto de ayuda */}
     </div>
   );
 };
