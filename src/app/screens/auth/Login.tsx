@@ -72,33 +72,36 @@ const Login: React.FC = () => {
           />
           {errors.email && <div className="invalid-feedback">{errors.email}</div>}
         </div>
-
-        <div className="mb-4 position-relative">
+        
+        <div className="mb-4">
           <label htmlFor="loginPassword" className="form-label">
             Contraseña
           </label>
-          <input
-            id="loginPassword"
-            type={showPassword ? "text" : "password"}
-            className={`form-control ${errors.password ? "is-invalid" : ""}`}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="********"
-          />
-          <span
-            onClick={togglePassword}
-            role="button"
-            className="position-absolute top-50 end-0 translate-middle-y me-3"
-          >
-            {showPassword ? (
-              <i className="bi bi-eye-slash fs-5"></i>
-            ) : (
-              <i className="bi bi-eye fs-5"></i>
+          <div className="position-relative">
+            <input
+              id="loginPassword"
+              type={showPassword ? "text" : "password"}
+              className={`form-control pe-5 ${errors.password ? "is-invalid" : ""}`}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="********"
+            />
+            <span
+              onClick={togglePassword}
+              role="button"
+              className="position-absolute top-50 end-0 translate-middle-y me-3"
+              style={{ cursor: "pointer" }}
+            >
+              {showPassword ? (
+                <i className="bi bi-eye-slash fs-5"></i>
+              ) : (
+                <i className="bi bi-eye fs-5"></i>
+              )}
+            </span>
+            {errors.password && (
+              <div className="invalid-feedback d-block">{errors.password}</div>
             )}
-          </span>
-          {errors.password && (
-            <div className="invalid-feedback">{errors.password}</div>
-          )}
+          </div>
         </div>
 
         <button
