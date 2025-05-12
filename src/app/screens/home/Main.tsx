@@ -10,7 +10,7 @@ const Main: React.FC = () => {
   return (
     <main id="main" className="main">
       <PageTittle page="Home" />
-      <Home proyectosIniciales={[]} />
+      <Home />
     </main>
   );
 };

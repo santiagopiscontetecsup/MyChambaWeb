@@ -12,7 +12,7 @@ const Logo: React.FC = () => {
     <div className="d-flex align-items-center justify-content-between">
       <a href="/home" className="logo d-flex align-items-center">
         {/* <img src="/logo.png" alt="Logo" /> */}
-        <span className="d-none d-lg-block">MyChamba</span>
+        <span className="d-none d-lg-block">FullChamba</span>
       </a>
       <i
         className="bi bi-list toggle-sidebar-btn"

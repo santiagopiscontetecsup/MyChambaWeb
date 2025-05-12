@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import "@/components/cards/styles/cards.css";
 import { Project } from "@/data/projects/mockData";
 import avatar from "@/assets/avatar.jpg";
@@ -10,6 +11,12 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ card }) => {
+  const router = useRouter();
+
+  const handleViewApplicants = () => {
+    router.push(`/applicants/${card.id}`);
+  };
+
   return (
     <div className="col-12 col-md-6 col-lg-4 mb-4">
       <div className="card h-100 shadow-sm card-hover">
@@ -48,7 +55,11 @@ const Card: React.FC<Props> = ({ card }) => {
               <span>{card.members || 0} miembros</span>
             </div>
             <div className="d-flex gap-2">
-              <button className="btn p-0 border-0 text-secondary" title="Ver">
+              <button
+                className="btn p-0 border-0 text-secondary"
+                title="Ver postulantes"
+                onClick={handleViewApplicants}
+              >
                 <i className="bi bi-eye-fill"></i>
               </button>
               <button className="btn p-0 border-0 text-secondary" title="Editar">

@@ -3,27 +3,58 @@
 import React, { useEffect, useState } from "react";
 import './styles/home.css';
 import Card from "@/components/cards/Cards";
-import { Proyecto } from "@/models/project";
+import avatar from "@/assets/avatar.jpg";
 
-interface HomeProps {
-  proyectosIniciales: Proyecto[]; 
-}
+import { getProjectsByEmpresaId } from "@/services/empresa/getProjects";
+import { getUserFromToken } from "@/services/auth/authService";
+import { ProyectoEmpresa } from "@/models/proyectoEmpresa";
+import { Project } from "@/data/projects/mockData";
 
-const Home: React.FC<HomeProps> = ({ proyectosIniciales }) => {
-  const [proyectos, setProyectos] = useState<Proyecto[]>(proyectosIniciales || []);
+const Home = () => {
+  const [proyectos, setProyectos] = useState<Project[]>([]);
 
   useEffect(() => {
-    const storedProjects = localStorage.getItem('proyectosPublicados');
-    if (storedProjects) {
-      const proyectos = JSON.parse(storedProjects);
-      console.log("Proyectos cargados:", proyectos.map((p: Proyecto) => ({ id: p.id, title: p.title })));
-      const uniqueProyectos = proyectos.map((proyecto: Proyecto, index: number) => ({
-        ...proyecto,
-        id: proyecto.id || `unique-id-${index}`,
-      }));
-      localStorage.setItem('proyectosPublicados', JSON.stringify(uniqueProyectos));
-      setProyectos(uniqueProyectos);
-    }
+    const fetchProyectos = async () => {
+      try {
+        const user = getUserFromToken();
+        const idEmpresa = user?.idEmpresa;
+
+        if (!idEmpresa) {
+          console.error("idEmpresa no definido en el token");
+          return;
+        }
+
+        const data: ProyectoEmpresa[] = await getProjectsByEmpresaId(idEmpresa);
+
+        if (!Array.isArray(data)) {
+          console.error("Error: data no es un array", data);
+          return;
+        }
+
+        const adapted: Project[] = data
+          .map((proyecto) => ({
+            id: proyecto.id,
+            title: proyecto.nombre,
+            shortDescription: proyecto.descripcion,
+            logo: avatar.src,
+            date: new Date(proyecto.fechaLimite).toLocaleDateString("es-PE"),
+            technologies: [],
+            members: proyecto.numeroPostulaciones || 0
+          }))
+          .sort((a, b) => {
+            const dateA = new Date(a.date.split("/").reverse().join("/"));
+            const dateB = new Date(b.date.split("/").reverse().join("/"));
+            return dateB.getTime() - dateA.getTime();
+          })
+          .slice(0, 6); 
+
+        setProyectos(adapted);
+      } catch (error) {
+        console.error("Error al cargar proyectos para home:", error);
+      }
+    };
+
+    fetchProyectos();
   }, []);
 
   return (
@@ -34,20 +65,18 @@ const Home: React.FC<HomeProps> = ({ proyectosIniciales }) => {
       </div>
 
       <div className="row mt-5">
-        {proyectos.map((card) => (
-          <Card
-            key={`${card.id}-${card.title}-${Math.random()}`}
-            card={{
-              id: Number(card.id),
-              title: card.title,
-              shortDescription: card.description,
-              technologies: card.technologies || [],
-              date: card.deadline,
-              logo: card.logo || "",
-              members: card.members || 0,
-            }}
-          />
-        ))}
+        {proyectos.length > 0 ? (
+          proyectos.map((card) => (
+            <Card
+              key={card.id}
+              card={card}
+            />
+          ))
+        ) : (
+          <p className="text-center text-muted">
+            {proyectos.length === 0 ? "No hay proyectos recientes aún." : "Cargando proyectos..."}
+          </p>
+        )}
       </div>
     </section>
   );

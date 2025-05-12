@@ -56,28 +56,28 @@ const Register: React.FC = () => {
           {errors.email && <div className="invalid-feedback">{errors.email}</div>}
         </div>
 
-        <div className="mb-4 position-relative">
+        <div className="mb-4">
           <label htmlFor="registerPassword" className="form-label">Contraseña</label>
-          <input
-            id="registerPassword"
-            type={showPassword ? "text" : "password"}
-            className={`form-control ${errors.password ? "is-invalid" : ""}`}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="********"
-          />
-          <span
-            onClick={togglePassword}
-            role="button"
-            className="position-absolute top-50 end-0 translate-middle-y me-3"
-          >
-            {showPassword ? (
-              <i className="bi bi-eye-slash fs-5"></i>
-            ) : (
-              <i className="bi bi-eye fs-5"></i>
+          <div className="input-group">
+            <input
+              id="registerPassword"
+              type={showPassword ? "text" : "password"}
+              className={`form-control ${errors.password ? "is-invalid" : ""}`}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="********"
+            />
+            <span className="input-group-text bg-white" onClick={togglePassword} role="button">
+              {showPassword ? (
+                <i className="bi bi-eye-slash"></i>
+              ) : (
+                <i className="bi bi-eye"></i>
+              )}
+            </span>
+            {errors.password && (
+              <div className="invalid-feedback d-block">{errors.password}</div>
             )}
-          </span>
-          {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+          </div>
         </div>
 
         <button
