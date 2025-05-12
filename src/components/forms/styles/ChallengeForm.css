@@ -34,9 +34,148 @@ body {
   color: #406D96;
   margin-bottom: 8px;
 }
+body {
+  background-color: #f0f2f5;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+.challenge-form {
+  max-width: 600px;
+  margin-top: 40px;
+  margin: 60px auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  color: #2F3A56;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.challenge-form h2 {
+  text-align: center;
+  color: #406D96;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
 
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  color: #406D96;
+  margin-bottom: 8px;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #2F3A56;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+  border-color: #406D96;
+  outline: none;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #2F3A56;
+  gap: 10px
+}
+
+/* Oculta el checkbox nativo */
+.checkbox-input {
+  display: none;
+}
+
+/* Diseño del checkbox personalizado */
+.checkbox-custom {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #406D96;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  padding-right: 4px;
+}
+
+/* Estado seleccionado */
+.checkbox-input:checked + .checkbox-custom {
+  background-color: #406D96;
+  border-color: #406D96;
+}
+
+/* Efecto hover */
+.checkbox-custom:hover {
+  border-color: #2F3A56;
+}
+
+.btn-submit {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #406D96;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.btn-submit:hover {
+  background-color: #2F3A56;
+}
+
+.btn-submit:focus {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .challenge-form {
+    padding: 15px;
+  }
+
+  .challenge-form h2 {
+    font-size: 1.5rem;
+  }
+}
 .error-message {
   color: #ff4d4f;
   font-size: 0.9rem;

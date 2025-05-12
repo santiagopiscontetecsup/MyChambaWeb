@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import "./styles/Register.css";
 
 const Register: React.FC = () => {
   const router = useRouter();
@@ -37,68 +38,79 @@ const Register: React.FC = () => {
   const handleLogin = () => router.push("/");
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow p-4" style={{ maxWidth: 400, width: "100%" }}>
-        <h2 className="text-center fw-bold mb-4">
-          Regístrate en <span className="text-primary">MyChamba</span>
-        </h2>
+    <div className="register-container">
+      <div className="register-card">
+        <form action="">
+          <h2 className="register-title">
+            Regístrate en <span className="register-brand">MyChamba</span>
+          </h2>
 
-        <div className="mb-3">
-          <label htmlFor="registerEmail" className="form-label">Correo electrónico</label>
-          <input
-            id="registerEmail"
-            type="email"
-            className={`form-control ${errors.email ? "is-invalid" : ""}`}
-            value={email}
-            onChange={(e) => setEmail(e.target.value.trimStart())}
-            placeholder="correo@ejemplo.com"
-          />
-          {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="registerPassword" className="form-label">Contraseña</label>
-          <div className="input-group">
-            <input
-              id="registerPassword"
-              type={showPassword ? "text" : "password"}
-              className={`form-control ${errors.password ? "is-invalid" : ""}`}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="********"
-            />
-            <span className="input-group-text bg-white" onClick={togglePassword} role="button">
-              {showPassword ? (
-                <i className="bi bi-eye-slash"></i>
-              ) : (
-                <i className="bi bi-eye"></i>
-              )}
-            </span>
-            {errors.password && (
-              <div className="invalid-feedback d-block">{errors.password}</div>
-            )}
+          {/* Campo de correo electrónico */}
+          <div className="register-field">
+            <label htmlFor="registerEmail" className="register-label">Correo electrónico</label>
+            <div className="register-input-container">
+              <input
+                id="registerEmail"
+                type="email"
+                className={`register-input ${errors.email ? "is-invalid" : ""}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value.trimStart())}
+                placeholder="correo@ejemplo.com"
+              />
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+            </div>
           </div>
-        </div>
 
-        <button
-          type="button"
-          className="btn btn-primary w-100 mb-3"
-          onClick={handleCreateAccount}
-        >
-          Siguiente
-        </button>
+          {/* Campo de contraseña */}
+          <div className="register-field">
+            <label htmlFor="registerPassword" className="register-label">Contraseña</label>
+            <div className="register-input-container">
+              <input
+                id="registerPassword"
+                type={showPassword ? "text" : "password"}
+                className={`register-input ${errors.password ? "is-invalid" : ""}`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="********"
+              />
+              <span
+                className="register-password-toggle"
+                onClick={togglePassword}
+                role="button"
+              >
+                {showPassword ? (
+                  <i className="bi bi-eye-slash"></i>
+                ) : (
+                  <i className="bi bi-eye"></i>
+                )}
+              </span>
+              {errors.password && (
+                <div className="invalid-feedback">{errors.password}</div>
+              )}
+            </div>
+          </div>
 
-        <div className="text-center">
-          <p className="mb-0">
-            ¿Ya tienes cuenta?
-            <button
-              type="button"
-              onClick={handleLogin}
-              className="btn btn-link p-0 ms-1"
-            >
-              Iniciar sesión
-            </button>
-          </p>
+          {/* Botón de siguiente */}
+          <button
+            type="button"
+            className="register-button"
+            onClick={handleCreateAccount}
+          >
+            Siguiente
+          </button>
+        </form>
+      </div>
+      <div className="toggle-box">
+        <div className="toggle-panel toggle-right">
+          <h2>Bienvenido nuevamente </h2>
+          <p>¿Ya tienes una cuenta?</p>
+          <button
+            type="button"
+            className="btn register-button"
+            onClick={handleLogin}
+          >
+            Iniciar sesión
+          </button>
         </div>
       </div>
     </div>

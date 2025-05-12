@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/services/login/loginService"; 
+import { loginUser } from "@/services/login/loginService";
+import "./styles/Login.css"
+import { href } from "react-router-dom";
 
 const Login: React.FC = () => {
   const router = useRouter();
@@ -32,7 +34,7 @@ const Login: React.FC = () => {
     try {
       setLoading(true);
       const response = await loginUser(email, password);
-      // localStorage.setItem("token", response.token);
+      localStorage.setItem("token", response.token);
       router.push("/home");
     } catch (err: any) {
       setErrors({ general: "Correo o contraseña incorrectos." });
@@ -46,95 +48,106 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow p-4" style={{ maxWidth: 400, width: "100%" }}>
-        <h2 className="text-center fw-bold mb-4">
-          Bienvenido a <span className="text-primary">MyChamba</span>
-        </h2>
+    <div className="login-container">
+      <div className="login-card">
+        <form action="">
+          <h2 className="login-title">
+            Iniciar sesión<span className="login-brand"></span>
+          </h2>
 
-        {errors.general && (
-          <div className="alert alert-danger py-2 text-center" role="alert">
-            {errors.general}
-          </div>
-        )}
-
-        <div className="mb-3">
-          <label htmlFor="loginEmail" className="form-label">
-            Correo electrónico
-          </label>
-          <input
-            id="loginEmail"
-            type="email"
-            className={`form-control ${errors.email ? "is-invalid" : ""}`}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="correo@ejemplo.com"
-          />
-          {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-        </div>
-        
-        <div className="mb-4">
-          <label htmlFor="loginPassword" className="form-label">
-            Contraseña
-          </label>
-          <div className="position-relative">
-            <input
-              id="loginPassword"
-              type={showPassword ? "text" : "password"}
-              className={`form-control pe-5 ${errors.password ? "is-invalid" : ""}`}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="********"
-            />
-            <span
-              onClick={togglePassword}
-              role="button"
-              className="position-absolute top-50 end-0 translate-middle-y me-3"
-              style={{ cursor: "pointer" }}
-            >
-              {showPassword ? (
-                <i className="bi bi-eye-slash fs-5"></i>
-              ) : (
-                <i className="bi bi-eye fs-5"></i>
-              )}
-            </span>
-            {errors.password && (
-              <div className="invalid-feedback d-block">{errors.password}</div>
+            {errors.general && (
+              <div className="login-error-general">
+                {errors.general}
+              </div>
             )}
+          
+          <div className="login-field">
+            <label htmlFor="loginEmail" className="login-label">
+              Correo electrónico
+            </label>
+            <div className="input-box">
+              <input
+                id="loginEmail"
+                type="email"
+                className={`login-input ${errors.email ? "login-input-error" : ""}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="correo@ejemplo.com"
+              />
+              {errors.email && <div className="login-error">{errors.email}</div>}
+            </div>
           </div>
-        </div>
+        
+          <div className="login-field">
+            <label htmlFor="loginPassword" className="login-label">
+              Contraseña
+            </label>
+            <div className="input-box">
+              <input
+                id="loginPassword"
+                type={showPassword ? "text" : "password"}
+                className={`login-input ${errors.password ? "login-input-error" : ""}`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="********"
+              />
+              <span
+                onClick={togglePassword}
+                className="login-password-toggle"
+                role="button"
+              >
+                {showPassword ? (
+                  <i className="bi bi-eye-slash"></i> // Ícono de ojo tachado
+                ) : (
+                  <i className="bi bi-eye"></i> // Ícono de ojo
+                )}
+              </span>
+            </div>
+            {errors.password && <div className="login-error">{errors.password}</div>}
+          </div>
+          <div className="login-forgot-password">
+            <a href="#" className="login-forgot-password">
+              Olvidaste tu contraseña?
+            </a>
+          </div>
 
-        <button
-          type="button"
-          className="btn btn-primary w-100 mb-3"
-          onClick={handleLogin}
-          disabled={loading}
-        >
-          {loading ? "Cargando..." : "Ingresar"}
-        </button>
+          <button
+            type="button"
+            className="login-button"
+            onClick={handleLogin}
+            disabled={loading}
+          >
+            {loading ? "Cargando..." : "Ingresar"}
+          </button>
 
-        <div className="d-flex align-items-center my-3">
-          <div className="flex-grow-1 border-top" />
-          <div className="mx-2 text-muted small">o</div>
-          <div className="flex-grow-1 border-top" />
-        </div>
+          <div className="login-register">
+            <p>
+              registrate con
+            </p>
+            <div className="referencias">
+              <a href="#"><i className='bi bi-google'></i></a>
+              <a href="#"><i className='bi bi-linkedin'></i></a>
+            </div>
+          </div>
+        </form>
+      </div>
 
-        <div className="text-center">
-          <p className="mb-0">
-            ¿No tienes cuenta?
-            <button
-              type="button"
-              onClick={handleRegister}
-              className="btn btn-link p-0 ms-1"
-            >
-              Regístrate ahora
-            </button>
-          </p>
+      <div className="toggle-box">
+        <div className="toggle-panel toggle-left">
+          <h2>Bienvenido a MyChamba</h2>
+          <p>¿Tu primera vez en MyChamba?</p>
+          <button
+            type="button"
+            className="btn register-button"
+            onClick={handleRegister}
+          >
+            Crea una cuenta
+          </button>
         </div>
       </div>
+
     </div>
   );
 };
 
 export default Login;
-

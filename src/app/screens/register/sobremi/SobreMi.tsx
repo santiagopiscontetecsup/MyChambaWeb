@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+/** @jsxImportSource react */
 import { useRouter } from "next/navigation";
 import { registerEmpresa, RegisterEmpresaDTO } from "@/services/register/registerService";
+import "./styles/SobreMi.css";
 
 const sectores = [
   { id: 1, nombre: "Tecnología" },
@@ -56,7 +58,7 @@ const SobreMi: React.FC = () => {
         idSector: Number(idSector),
       },
     };
-    
+
     try {
       setLoading(true);
       console.log("Payload a enviar:", payload);
@@ -72,77 +74,100 @@ const SobreMi: React.FC = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow p-4" style={{ maxWidth: 500, width: "100%" }}>
-        <h2 className="text-center fw-bold mb-4">Cuéntanos sobre tu empresa</h2>
-        {errors.general && <div className="alert alert-danger">{errors.general}</div>}
+    <div className="sobre-mi-container">
+      <div className="sobre-mi-card">
+        <form action="">
+          <h2 className="sobre-mi-title">Cuéntanos sobre tu empresa</h2>
+          {errors.general && <div className="sobre-mi-error-general">{errors.general}</div>}
 
-        <div className="mb-3">
-          <label className="form-label">Nombre de la empresa</label>
-          <input
-            type="text"
-            className={`form-control ${errors.nombre ? "is-invalid" : ""}`}
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-          />
-          {errors.nombre && <div className="invalid-feedback">{errors.nombre}</div>}
-        </div>
+          {/* Campo de nombre */}
+          <div className="sobre-mi-field">
+            <label htmlFor="nombreEmpresa" className="sobre-mi-label">Nombre de la empresa</label>
+            <input
+              id="nombreEmpresa"
+              type="text"
+              className={`sobre-mi-input ${errors.nombre ? "is-invalid" : ""}`}
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
+            {errors.nombre && <div className="invalid-feedback">{errors.nombre}</div>}
+          </div>
 
-        <div className="mb-3">
-          <label className="form-label">Teléfono</label>
-          <input
-            type="text"
-            className="form-control"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
-          />
-        </div>
+          {/* Campo de teléfono */}
+          <div className="sobre-mi-field">
+            <label htmlFor="telefonoEmpresa" className="sobre-mi-label">Teléfono</label>
+            <input
+              id="telefonoEmpresa"
+              type="text"
+              className="sobre-mi-input"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+            />
+          </div>
 
-        <div className="mb-3">
-          <label className="form-label">Dirección</label>
-          <input
-            type="text"
-            className="form-control"
-            value={direccion}
-            onChange={(e) => setDireccion(e.target.value)}
-          />
-        </div>
+          {/* Campo de dirección */}
+          <div className="sobre-mi-field">
+            <label htmlFor="direccionEmpresa" className="sobre-mi-label">Dirección</label>
+            <input
+              id="direccionEmpresa"
+              type="text"
+              className="sobre-mi-input"
+              value={direccion}
+              onChange={(e) => setDireccion(e.target.value)}
+            />
+          </div>
 
-        <div className="mb-3">
-          <label className="form-label">Sector</label>
-          <select
-            className={`form-select ${errors.idSector ? "is-invalid" : ""}`}
-            value={idSector ?? ""}
-            onChange={(e) => setIdSector(e.target.value === "" ? "" : parseInt(e.target.value))}
-            >
-            <option value="">Selecciona un sector</option>
-            {sectores.map((s) => (
-                <option key={s.id} value={s.id}>{s.nombre}</option>
-            ))}
-            </select>
-          {errors.idSector && <div className="invalid-feedback">{errors.idSector}</div>}
-        </div>
+          {/* Campo de sector */}
+          <div className="sobre-mi-field">
+            <label htmlFor="sectorEmpresa" className="sobre-mi-label">Sector</label>
+            <div className="sobre-mi-field">
+              <select
+                id="sectorEmpresa"
+                className={`sobre-mi-select ${errors.idSector ? "is-invalid" : ""}`}
+                value={idSector ?? ""}
+                onChange={(e) => setIdSector(e.target.value === "" ? "" : parseInt(e.target.value))}
+                >
+                <option value="">Selecciona un sector</option>
+                {sectores.map((s) => (
+                  <option key={s.id} value={s.id}>{s.nombre}</option>
+                ))}
+              </select>
+              {errors.idSector && <div className="invalid-feedback">{errors.idSector}</div>}
+            </div>
+          </div>
 
-        <div className="mb-3">
-          <label className="form-label">RUC</label>
-          <input
-            type="text"
-            className={`form-control ${errors.ruc ? "is-invalid" : ""}`}
-            value={ruc}
-            onChange={(e) => setRuc(e.target.value)}
-          />
-          {errors.ruc && <div className="invalid-feedback">{errors.ruc}</div>}
-        </div>
+          {/* Campo de RUC */}
+          <div className="sobre-mi-field">
+            <label htmlFor="rucEmpresa" className="sobre-mi-label">RUC</label>
+            <input
+              id="rucEmpresa"
+              type="text"
+              className={`sobre-mi-input ${errors.ruc ? "is-invalid" : ""}`}
+              value={ruc}
+              onChange={(e) => setRuc(e.target.value)}
+            />
+            {errors.ruc && <div className="invalid-feedback">{errors.ruc}</div>}
+          </div>
 
-        <button
-          type="button"
-          className="btn btn-primary w-100"
-          onClick={handleFinalize}
-          disabled={loading}
-        >
-          {loading ? "Registrando..." : "Finalizar registro"}
-        </button>
+          {/* Botón de finalizar */}
+          <button
+            type="button"
+            className="sobre-mi-button"
+            onClick={handleFinalize}
+            disabled={loading}
+          >
+            {loading ? "Registrando..." : "Finalizar registro"}
+          </button>
+        </form>     
       </div>
+
+      <div className="toggle-box">
+        <div className="toggle-panel toggle-left">
+          <h2>MyChamba</h2>
+          <p>Falta poco para registrarte</p>
+        </div>
+      </div>
+
     </div>
   );
 };

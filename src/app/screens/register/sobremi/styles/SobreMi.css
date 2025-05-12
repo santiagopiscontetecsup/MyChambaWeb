@@ -14,7 +14,7 @@ body {
 
 }
 
-.login-container {
+.sobre-mi-container {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,7 +25,7 @@ body {
 
 }
 
-.login-card {
+.sobre-mi-card {
     position: absolute;
     right: 0;
     width: 50%;
@@ -44,26 +44,26 @@ form{
     width: 100%;
 }
 
-.login-card h2 {
+.sobre-mi-card h2 {
     font-size: 2.5rem;
     margin: -10px 0;
     margin-bottom: 10px;
     color: #080000;
 }
 
-.login-label{
+.sobre-mi-label{
     font-size: 17px;
     margin-top: 10px;
-    margin-bottom: -10px;
+    margin-bottom: 17px;
     color: #080000;
 }
 
-.input-box{
+.sobre-mi-field{
     position: relative;
-    margin: 20px 0;
+    margin: 13px 0;
 }
 
-.input-box input{
+.sobre-mi-field input{
     width: 100%;
     padding: 13px 50px 13px 20px;
     background: #fff;
@@ -76,12 +76,26 @@ form{
     margin-top: -12px;
 }
 
-.input-box input::placeholder{
+.sobre-mi-field select{
+    width: 100%;
+    padding: 13px 50px 13px 20px;
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #3d507b;
+    outline: none;
+    font-size: 16px;
+    color:#333;
+    font-weight: 100px;
+    margin-top: -30px;
+}
+
+
+.sobre-mi-field input::placeholder{
     color: #888;
     font-weight: 400;
 }
 
-.input-box i{
+.sobre-mi-field i{
     position:absolute;
     right:20px;
     top: 1%;
@@ -90,7 +104,7 @@ form{
     color: #888;
 }
 
-.login-button{
+.sobre-mi-button{
     width: 100%;
     height: 48px;
     background: #3d507b;
@@ -100,35 +114,7 @@ form{
     font-size: 16px;
     color:#fff;
     font-weight: 600;
-}
-
-.login-forgot-password {
-    margin: 15px 0 20px;
-}
-
-.login-forgot-password a{
-    font-size: 14 .5px;
-    color: #fff;
-    text-decoration: none;
-    color: #080000;
-}
-
-
-.login-container p{
-    font-size: 14px .5px;
-    margin: 15px 0;
-    color: #080000;
-}
-
-.referencias a { 
-    display: inline-flex;
-    padding: 10px;
-    border: 2px solid #3d507b;
-    border-radius: 8px;
-    font-size: 20px;
-    color: #3d507b;
-    text-decoration: none;
-    margin: 0 8px;
+    margin-top: 20px;
 }
 
 .toggle-box {
