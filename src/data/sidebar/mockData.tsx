@@ -32,14 +32,14 @@ export const navList: NavItem[] = [
   // },
   {
     id: 4,
-    name: "Profile",
+    name: "Perfil",
     icon: "bi bi-person",
     category: "others",
     path: "/profile",
   },
   {
     id: 5,
-    name: "Settings",
+    name: "Ajustes",
     icon: "bi bi-gear",
     category: "others",
     path: "/settings",

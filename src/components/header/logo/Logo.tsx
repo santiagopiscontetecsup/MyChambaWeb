@@ -1,17 +1,19 @@
 "use client";
 
-import React from 'react'
+import React from 'react';
 
 import '@/components/header/styles/Logo.css';
+import profileImg from "@/assets/avatar.jpg";
+
 const Logo: React.FC = () => {
-    const handleToggleSidebar = () => {
-        document.body.classList.toggle("toggle-sidebar");
-    };
+  const handleToggleSidebar = () => {
+    document.body.classList.toggle("toggle-sidebar");
+  };
 
   return (
     <div className="d-flex align-items-center justify-content-between">
       <a href="/home" className="logo d-flex align-items-center">
-        {/* <img src="/logo.png" alt="Logo" /> */}
+        <img src={profileImg.src || profileImg} alt="Logo" />
         <span className="d-none d-lg-block">FullChamba</span>
       </a>
       <i
