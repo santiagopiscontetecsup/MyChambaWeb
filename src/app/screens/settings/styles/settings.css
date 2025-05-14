@@ -1,0 +1,118 @@
+.settings-container {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #2F3A56;
+}
+
+.profile-card {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-banner {
+  background-size: cover;
+  background-position: center;
+  padding: 1.5rem;
+  color: white;
+  background-color: #2F3A56;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-avatar {
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile-role {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.settings-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.settings-item {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  padding: 0.9rem 1.2rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2F3A56;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.settings-item::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #406D96;
+  opacity: 0.05;
+  transition: width 0.3s ease;
+  z-index: 0;
+}
+
+.settings-item:hover::after {
+  width: 100%;
+}
+
+.settings-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.icon {
+  margin-right: 0.75rem;
+  color: #406D96;
+  font-size: 1.2rem;
+  z-index: 1;
+}
+
+.settings-item span,
+.settings-item svg,
+.settings-item p {
+  z-index: 1;
+}
+
+.version {
+  margin-left: auto;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.logout {
+  background-color: #fff0f0;
+  border: 1px solid #f5c2c7;
+}
+
+.logout:hover {
+  background-color: #f8d7da;
+}

@@ -6,6 +6,7 @@ export const getPostulantesByProyectoId = async (
 ): Promise<Postulante[]> => {
   const response = await api.get<Postulante[]>(`/api/Postulantes/proyecto/${idProyecto}/postulantes`, {
     headers: {
+      "ngrok-skip-browser-warning": "69420",
     },
   });
 
