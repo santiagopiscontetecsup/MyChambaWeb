@@ -13,6 +13,7 @@
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
     "bootstrap-icons": "^1.11.3",
+    "date-fns": "^4.1.0",
     "jwt-decode": "^4.0.0",
     "mychamba": "file:",
     "next": "15.3.1",

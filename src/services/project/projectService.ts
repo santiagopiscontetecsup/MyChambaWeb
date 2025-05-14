@@ -16,7 +16,9 @@ export const publishProyecto = async (proyecto: any, token: string) => {
     try {
       const response = await api.post("/api/Proyectos", proyecto, {
         headers: {
-          Authorization: `Bearer ${token}`, // Agregar el token al encabezado
+          Authorization: `Bearer ${token}`, 
+          "ngrok-skip-browser-warning": "69420",
+          
         },
       });
       return response.data;

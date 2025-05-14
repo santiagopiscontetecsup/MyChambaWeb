@@ -4,7 +4,6 @@ import { getUserFromToken } from "@/services/auth/authService";
 import { publishProyecto } from "@/services/project/projectService";
 import "./styles/DetailChallenge.css";
 
-// Mapeo de habilidades
 const habilidadesMap: { [key: number]: string } = {
   1: "Java",
   2: "Python",
@@ -13,11 +12,10 @@ const habilidadesMap: { [key: number]: string } = {
   5: "React",
 };
 
-// Función para formatear la fecha
 const formatFecha = (fecha: string): string => {
   const date = new Date(fecha);
   const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Los meses empiezan en 0
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); 
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
@@ -69,14 +67,13 @@ const DetailChallenge: React.FC = () => {
 
       alert("Proyecto publicado con éxito en el servidor");
       localStorage.removeItem("formProyecto");
-      router.push("/home");
+      router.push("/myprojects");
     } catch (error) {
       console.error("Error en la publicación del proyecto:", error);
       alert("Ocurrió un error al publicar el proyecto.");
     }
   };
 
-  // Convertir IDs de habilidades a nombres
   const habilidades =
     Array.isArray(proyecto.idHabilidades) && proyecto.idHabilidades.length > 0
       ? proyecto.idHabilidades.map((id: number) => habilidadesMap[id] || `Habilidad desconocida (${id})`).join(", ")
