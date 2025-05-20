@@ -1,0 +1,33 @@
+/* profile.css */
+
+button.custom-btn {
+  display: inline-block;
+  margin: 10px 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #406D96;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.custom-btn:hover {
+  background-color: #2F3A56;
+}
+
+button.custom-btn:focus {
+  outline: none;
+}
+
+button.custom-btn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  button.custom-btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

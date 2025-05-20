@@ -1,82 +1,98 @@
-/* Estilo general para centrar la tarjeta */
-.project-card {
-  max-width: 600px; /* Ancho máximo de la tarjeta */
-  margin: 50px auto; /* Centrar horizontalmente y agregar espacio superior */
-  padding: 20px; /* Espaciado interno */
-  background-color: #ffffff; /* Fondo blanco */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
-  text-align: center; /* Centrar texto */
-  font-family: Arial, sans-serif; /* Fuente */
+body {
+  background-color: #f0f2f5;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Título del proyecto */
-.project-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333333;
-  margin-bottom: 10px;
+h1 {
+  color: #406D96;
+  margin: 10px;
+  padding: 0;
 }
 
-/* Descripción del proyecto */
-.project-description {
-  font-size: 16px;
-  color: #666666;
+hr {
+  height: 3px;
+  background-color: #082c4d;
+  margin: 4px 0;
+  margin-bottom: 30px;
+}
+
+.detalle-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  color: #2F3A56;
+}
+
+.detalle-container h1 {
+  font-size: 2rem;
+  color: #406D96;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.detalle-item {
   margin-bottom: 20px;
 }
 
-/* Detalles del proyecto */
-.project-details {
-  margin-top: 20px;
-  text-align: left; /* Alinear texto a la izquierda */
-}
-
-.detail {
-  margin-bottom: 15px;
-}
-
-.label {
+.detalle-item-title {
+  background-color: #406D96;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
   font-weight: bold;
-  color: #555555;
+  font-size: 1rem;
 }
 
-.detail p {
-  margin: 0;
-  color: #333333;
+.detalle-item-data {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #2F3A56;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
 }
 
-/* Botones */
-.button-group {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 15px; /* Espaciado entre botones */
-}
-
-.edit-button,
-.publish-button {
+button {
+  display: inline-block;
+  margin: 10px 5px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #406D96;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.edit-button {
-  background-color: #007bff;
-  color: white;
+button:hover {
+  background-color: #2F3A56;
 }
 
-.edit-button:hover {
-  background-color: #0056b3;
+button:focus {
+  outline: none;
 }
 
-.publish-button {
-  background-color: #28a745;
-  color: white;
+button:active {
+  transform: scale(0.98);
 }
 
-.publish-button:hover {
-  background-color: #1e7e34;
+@media (max-width: 768px) {
+  .detalle-container {
+    padding: 15px;
+  }
+
+  .detalle-container h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+    margin: 10px 0;
+  }
 }
