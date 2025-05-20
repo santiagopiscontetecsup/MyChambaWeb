@@ -17,7 +17,6 @@ export const getNotificacionesByEmpresaId = async (): Promise<Notificacion[]> =>
     `/api/Notificaciones/empresa/${user.idEmpresa}`,
     {
       headers: {
-        "ngrok-skip-browser-warning": "69420",
       },
     }
   );

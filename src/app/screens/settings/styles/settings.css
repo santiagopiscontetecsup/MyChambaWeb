@@ -74,8 +74,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: #406D96;
-  opacity: 0.05;
+  background: rgba(64, 109, 150, 0.07); /* equivalente a un azul claro traslúcido */
   transition: width 0.3s ease;
   z-index: 0;
 }
@@ -85,8 +84,8 @@
 }
 
 .settings-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); /* sombra más suave */
 }
 
 .icon {

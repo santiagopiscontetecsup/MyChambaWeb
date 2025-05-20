@@ -9,7 +9,6 @@ export const getProjectsByEmpresaId = async (
     params: { idEmpresa },
     headers: {
       ...(token && { Authorization: `Bearer ${token}` }),
-      "ngrok-skip-browser-warning": "69420",
     },
   });
   return response.data;

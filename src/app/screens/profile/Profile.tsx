@@ -1,19 +1,66 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { userProfile } from "@/data/profile/mockData";
 import { useRouter } from "next/navigation";
 import "./styles/profile.css"; 
 import Card from "@/components/cards/Cards";
-import { projectList } from "@/data/projects/mockData";
-
+import { getProjectsByEmpresaId } from "@/services/empresa/getProjects";
+import { getUserFromToken } from "@/services/auth/authService";
+import avatar from "@/assets/avatar.jpg";
 
 const Profile: React.FC = () => {
   const router = useRouter();
 
+  // Estado para proyectos
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const handleClick = () => {
     router.push("/postchallenge");
   };
+
+  // Fetch proyectos dinámicos al montar componente
+  useEffect(() => {
+    const fetchProyectos = async () => {
+      try {
+        const user = getUserFromToken();
+        const idEmpresa = user?.idEmpresa;
+
+        if (!idEmpresa) {
+          console.error("idEmpresa no definido en el token");
+          setLoading(false);
+          return;
+        }
+
+        const data = await getProjectsByEmpresaId(idEmpresa);
+
+        if (!Array.isArray(data)) {
+          console.error("Error: data no es un array", data);
+          setLoading(false);
+          return;
+        }
+
+        const adapted = data.map((proyecto: any) => ({
+          id: proyecto.id,
+          title: proyecto.nombre,
+          shortDescription: proyecto.descripcion,
+          logo: avatar.src,
+          date: new Date(proyecto.fechaLimite).toLocaleDateString("es-PE"),
+          technologies: [], 
+          members: proyecto.numeroPostulaciones || 0,
+        }));
+
+        setProjects(adapted);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error al cargar proyectos:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchProyectos();
+  }, []);
 
   return (
     <div className="container mt-4">
@@ -27,10 +74,7 @@ const Profile: React.FC = () => {
 
         <div
           className="position-absolute top-100 start-50 translate-middle"
-          style={{ 
-            marginTop: "20px",
-
-           }}
+          style={{ marginTop: "20px" }}
         >
           <img
             src={userProfile.profileImage}
@@ -76,26 +120,24 @@ const Profile: React.FC = () => {
 
       <br />
 
+      {/* Aquí muestra proyectos dinámicos desde backend en vez del mock */}
+      <div className="row">
+        {loading ? (
+          <p className="text-center text-muted">Cargando proyectos...</p>
+        ) : projects.length > 0 ? (
+          projects.map((card) => <Card key={card.id} card={card} />)
+        ) : (
+          <p className="text-center text-muted">No tienes proyectos publicados aún.</p>
+        )}
+      </div>
+
       <div className="d-flex justify-content-center">
-      <button className="btn btn-primary mt-3" onClick={handleClick}>
+        <button className="custom-btn mt-3" onClick={handleClick}>
           Publicar retos
         </button>
       </div>
       
       <br />
-
-      <div className="row">
-        <div className="col-12">
-          <div className="row">
-            {projectList.map(card => (
-              <Card key={card.id} card={card} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      
-
     </div>
   );
 };
