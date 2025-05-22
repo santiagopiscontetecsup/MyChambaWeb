@@ -12,6 +12,8 @@
     background: #fff;
     border-radius: 0 0 0 0;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+
     /*overflow: hidden;*/
 
 }
@@ -111,6 +113,11 @@ form{
     color: #080000;
 }
 
+.referencias {
+    display: flex;
+    justify-content: center;
+}
+
 .referencias a { 
     display: inline-flex;
     padding: 10px;
@@ -166,4 +173,38 @@ form{
     background: transparent;
     border: 2px solid #fff;
     box-shadow: none;
+}
+
+@media screen and (max-width: 630px) {
+    .login-container {
+        height: calc(100vh - 40px);      
+    }
+
+    .login-card {
+        bottom: 0;
+        width: 100%;
+        height: 70%;
+    }
+
+    .toggle-box::before{
+        left: 0;
+        top: -270%;
+        width: 100%;
+        height: 300%;
+    }
+    .toggle-panel{
+            width: 100%;
+            height: 30%;
+        }
+
+    .toggle-panel.toggle-left{
+        top: 0;
+
+    }
+
+    .toggle-panel.toggle-right{
+        right: 0;
+        bottom: -30%;
+    }
+
 }
