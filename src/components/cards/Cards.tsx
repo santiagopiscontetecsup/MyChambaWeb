@@ -23,7 +23,13 @@ const Card: React.FC<Props> = ({ card }) => {
       <div className="card h-100 shadow-sm card-hover">
         <div className="card-body d-flex flex-column">
           <div className="d-flex align-items-center mb-3">
-            <Image src={card.logo || avatar.src} alt="Logo" className="avatar-logo me-2" />
+            <Image
+              src={card.logo || avatar.src}
+              alt="Logo"
+              width={50}
+              height={50}
+              className="avatar-logo me-2"
+            />
             <div>
               <h5 className="card-title mb-0">{card.title || "Sin título"}</h5>
               <small className="text-muted">Empresa: PisconteDev</small>

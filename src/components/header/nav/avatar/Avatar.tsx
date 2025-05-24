@@ -20,7 +20,13 @@ const Avatar: React.FC = () => {
         href="#"
         data-bs-toggle="dropdown"
       >
-        <Image src={avatarData.image} alt="Profile" className="rounded-circle" />
+        <Image
+          src={avatarData.image}
+          alt="Profile"
+          width={avatarData.image.width}   // Aquí Next.js tiene los valores correctos
+          height={avatarData.image.height}
+          className="rounded-circle"
+        />
         <span className="d-none d-md-block dropdown-toggle ps-2">{avatarData.name}</span>
       </a>
 

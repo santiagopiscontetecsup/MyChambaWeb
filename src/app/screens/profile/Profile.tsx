@@ -152,6 +152,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ProyectoEmpresa } from "@/models/proyectoEmpresa"; // Ajusta la ruta según tu proyecto
 import avatar from "@/assets/avatar.jpg";
+import background from "@/assets/img/fondo.jpg";
 import Card from "@/components/cards/Cards";
 import { getProjectsByEmpresaId } from "@/services/empresa/getProjects";
 import { getUserFromToken } from "@/services/auth/authService";
@@ -222,7 +223,7 @@ const Profile: React.FC = () => {
     <div className="container mt-4">
       <div className="position-relative">
         <Image
-          src="/path/to/background-image.jpg" // Reemplaza con el fondo correcto o una variable
+          src={background} // Reemplaza con el fondo correcto o una variable
           alt="Fondo"
           className="w-100 rounded shadow"
           style={{ height: "200px", objectFit: "cover" }}
@@ -235,7 +236,7 @@ const Profile: React.FC = () => {
           style={{ marginTop: "20px" }}
         >
           <Image
-            src="/path/to/profile-image.jpg" // Cambia esto también o usa userProfile.profileImage si tienes
+            src={avatar} // Cambia esto también o usa userProfile.profileImage si tienes
             alt="Perfil"
             className="rounded-circle border border-3"
             width={100}
