@@ -4,11 +4,12 @@ import React from "react";
 import "./styles/PostChallenge.css";
 import ChallengeForm from "@/components/forms/ChallengeForm";
 import { useRouter } from "next/navigation";
+import { Proyecto } from "@/models/project";
 
 const PostChallenge: React.FC = () => {
   const router = useRouter();
 
-  const handleSubmit = (proyecto: any) => {
+  const handleSubmit = (proyecto: Proyecto) => {
     console.log("Proyecto recibido:", proyecto);
     router.push("/detailchallenge");
   };
