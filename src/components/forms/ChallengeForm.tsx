@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import './styles/ChallengeForm.css';
-import CampoSwitch from '@/components/forms/campoSwitch/CampoSwitch';
 import CampoFecha from '@/components/forms/campoFecha/CampoFecha';
 import InputText from '@/components/forms/input/inputText/InputText';
 import { useRouter } from "next/navigation";
