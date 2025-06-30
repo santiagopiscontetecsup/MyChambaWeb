@@ -1,25 +1,29 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
 
-.login-page {
+/* Fondo general para toda la página de registro */
+.register-page {
   background: linear-gradient(to right, #f2f6ff, #e4ecf7);
 }
 
-.login-form {
-  background-color: transparent;
+/* Contenedor del formulario de registro */
+.register-form {
+  background-color: rgba(255, 255, 255, 0.2);
   max-width: 400px;
   width: 100%;
   padding: 2rem;
   backdrop-filter: blur(10px);
   border-radius: 1rem;
-  animation: fadeIn 1s ease-in;
+  /* No sobrescribimos animate.css, solo aplicamos estilos visuales */
 }
 
+/* Estilo para los inputs */
 input.form-control {
   border-radius: 0.5rem;
   padding: 0.75rem;
   font-size: 0.95rem;
 }
 
+/* Botón primario (registrarse / siguiente) */
 button.btn-primary {
   border-radius: 0.5rem;
   font-weight: 600;
@@ -31,6 +35,7 @@ button.btn-primary:hover {
   background-color: #2f3a56;
 }
 
+/* Botón de enlace (Iniciar sesión) */
 button.btn-link {
   color: #406d96;
   text-decoration: none;

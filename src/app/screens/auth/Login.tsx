@@ -2,7 +2,7 @@
 
 // import React, { useState } from "react";
 // import { useRouter } from "next/navigation";
-// import { loginUser } from "@/services/login/loginService"; 
+// import { loginUser } from "@/services/login/loginService";
 
 // const Login: React.FC = () => {
 //   const router = useRouter();
@@ -31,9 +31,10 @@
 
 //     try {
 //       setLoading(true);
-//       const response = await loginUser(email, password);
+//       await loginUser(email, password);
 //       router.push("/home");
-//     } catch (err: any) {
+//     } catch (error: unknown) {
+//       console.error(error)
 //       setErrors({ general: "Correo o contraseña incorrectos." });
 //     } finally {
 //       setLoading(false);
@@ -71,7 +72,7 @@
 //           />
 //           {errors.email && <div className="invalid-feedback">{errors.email}</div>}
 //         </div>
-        
+
 //         <div className="mb-4">
 //           <label htmlFor="loginPassword" className="form-label">
 //             Contraseña
@@ -142,6 +143,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/login/loginService";
+import "./styles/Login.css";
 
 const Login: React.FC = () => {
   const router = useRouter();
@@ -167,13 +169,12 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     if (!validate()) return;
-
     try {
       setLoading(true);
       await loginUser(email, password);
       router.push("/home");
     } catch (error: unknown) {
-      console.error(error)
+      console.error(error);
       setErrors({ general: "Correo o contraseña incorrectos." });
     } finally {
       setLoading(false);
@@ -185,10 +186,10 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow p-4" style={{ maxWidth: 400, width: "100%" }}>
+    <section className="login-page d-flex justify-content-center align-items-center vh-100">
+      <div className="login-form animate__animated animate__fadeIn">
         <h2 className="text-center fw-bold mb-4">
-          Bienvenido a <span className="text-primary">MyChamba</span>
+          Bienvenido a <span className="text-primary">FullChamba</span>
         </h2>
 
         {errors.general && (
@@ -198,11 +199,9 @@ const Login: React.FC = () => {
         )}
 
         <div className="mb-3">
-          <label htmlFor="loginEmail" className="form-label">
-            Correo electrónico
-          </label>
+          <label htmlFor="email" className="form-label">Correo electrónico</label>
           <input
-            id="loginEmail"
+            id="email"
             type="email"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
             value={email}
@@ -213,12 +212,10 @@ const Login: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="loginPassword" className="form-label">
-            Contraseña
-          </label>
+          <label htmlFor="password" className="form-label">Contraseña</label>
           <div className="position-relative">
             <input
-              id="loginPassword"
+              id="password"
               type={showPassword ? "text" : "password"}
               className={`form-control pe-5 ${errors.password ? "is-invalid" : ""}`}
               value={password}
@@ -227,19 +224,13 @@ const Login: React.FC = () => {
             />
             <span
               onClick={togglePassword}
-              role="button"
               className="position-absolute top-50 end-0 translate-middle-y me-3"
+              role="button"
               style={{ cursor: "pointer" }}
             >
-              {showPassword ? (
-                <i className="bi bi-eye-slash fs-5"></i>
-              ) : (
-                <i className="bi bi-eye fs-5"></i>
-              )}
+              {showPassword ? <i className="bi bi-eye-slash fs-5" /> : <i className="bi bi-eye fs-5" />}
             </span>
-            {errors.password && (
-              <div className="invalid-feedback d-block">{errors.password}</div>
-            )}
+            {errors.password && <div className="invalid-feedback d-block">{errors.password}</div>}
           </div>
         </div>
 
@@ -261,17 +252,13 @@ const Login: React.FC = () => {
         <div className="text-center">
           <p className="mb-0">
             ¿No tienes cuenta?
-            <button
-              type="button"
-              onClick={handleRegister}
-              className="btn btn-link p-0 ms-1"
-            >
+            <button onClick={handleRegister} className="btn btn-link p-0 ms-1">
               Regístrate ahora
             </button>
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
