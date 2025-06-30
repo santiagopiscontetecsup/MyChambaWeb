@@ -3,7 +3,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Principal from "./Principal";
-import "./styles/Principal.css";
+import "./styles/principal.css";
 
 const Main: React.FC = () => {
   return (
