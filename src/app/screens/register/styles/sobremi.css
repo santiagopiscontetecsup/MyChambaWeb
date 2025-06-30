@@ -1,20 +1,23 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
 
-.login-page {
+.sobremi-page {
   background: linear-gradient(to right, #f2f6ff, #e4ecf7);
+  min-height: 100vh;
+  padding-bottom: 4rem; /* espacio para el footer */
 }
 
-.login-form {
-  background-color: transparent;
-  max-width: 400px;
+.sobremi-form {
   width: 100%;
-  padding: 2rem;
-  backdrop-filter: blur(10px);
+  max-width: 480px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  padding: 2.5rem;
   border-radius: 1rem;
-  animation: fadeIn 1s ease-in;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
 
-input.form-control {
+input.form-control,
+select.form-select {
   border-radius: 0.5rem;
   padding: 0.75rem;
   font-size: 0.95rem;
@@ -31,11 +34,6 @@ button.btn-primary:hover {
   background-color: #2f3a56;
 }
 
-button.btn-link {
-  color: #406d96;
-  text-decoration: none;
-}
-
-button.btn-link:hover {
-  text-decoration: underline;
+.invalid-feedback {
+  font-size: 0.85rem;
 }
