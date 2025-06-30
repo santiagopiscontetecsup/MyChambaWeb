@@ -2,8 +2,9 @@
 
 import React from "react";
 import "./styles/PostChallenge.css";
-import ChallengeForm, { Proyecto } from "@/components/forms/ChallengeForm";
+import ChallengeForm from "@/components/forms/ChallengeForm";
 import { useRouter } from "next/navigation";
+import { Proyecto } from "@/models/project";
 
 const PostChallenge: React.FC = () => {
   const router = useRouter();

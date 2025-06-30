@@ -4,6 +4,14 @@ import { getUserFromToken } from "@/services/auth/authService";
 import { publishProyecto } from "@/services/project/projectService";
 import "./styles/DetailChallenge.css";
 
+interface Proyecto {
+  titulo: string;
+  descripcion: string;
+  fechaLimite: string;
+  tipoRecompensa: number;
+  idHabilidades: number[];
+}
+
 const habilidadesMap: { [key: number]: string } = {
   1: "Java",
   2: "Python",
@@ -21,15 +29,19 @@ const formatFecha = (fecha: string): string => {
 };
 
 const DetailChallenge: React.FC = () => {
-  const [proyecto, setProyecto] = useState<any>(null);
+  const [proyecto, setProyecto] = useState<Proyecto | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const storedData = localStorage.getItem("formProyecto");
     if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      console.log("Proyecto cargado desde localStorage:", parsedData);
-      setProyecto(parsedData);
+      try {
+        const parsedData: Proyecto = JSON.parse(storedData);
+        console.log("Proyecto cargado desde localStorage:", parsedData);
+        setProyecto(parsedData);
+      } catch (error) {
+        console.error("Error al parsear proyecto del localStorage:", error);
+      }
     } else {
       console.log("No se encontró ningún proyecto en localStorage.");
     }
@@ -76,7 +88,7 @@ const DetailChallenge: React.FC = () => {
 
   const habilidades =
     Array.isArray(proyecto.idHabilidades) && proyecto.idHabilidades.length > 0
-      ? proyecto.idHabilidades.map((id: number) => habilidadesMap[id] || `Habilidad desconocida (${id})`).join(", ")
+      ? proyecto.idHabilidades.map((id) => habilidadesMap[id] || `Habilidad desconocida (${id})`).join(", ")
       : "No hay habilidades";
 
   return (

@@ -77,6 +77,7 @@
 
 import React, { useState } from "react";
 import "@/components/cards/styles/cards.css";
+import Image from "next/image";
 import avatar from "@/assets/avatar.jpg";
 import { aceptarPostulante } from "@/services/empresa/postApplicants";
 import { useRouter } from "next/navigation";
@@ -118,7 +119,7 @@ const CardPostulante: React.FC<Props> = ({ postulante }) => {
       <div className="card h-100 shadow-sm card-hover">
         <div className="card-body d-flex flex-column">
           <div className="d-flex align-items-center mb-3">
-            <img src={avatar.src} alt="Avatar" className="avatar-logo me-2" />
+            <Image src={avatar.src} alt="Avatar" className="avatar-logo me-2" />
             <div>
               <h5 className="card-title mb-0">{postulante.nombreCompleto}</h5>
               <small className="text-muted">{postulante.universidad}</small>

@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import PageTittle from "../home/pageTittle/PageTittle";
 import DetailChallenge from "./DetailChallenge";
 

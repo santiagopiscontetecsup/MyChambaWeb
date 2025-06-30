@@ -1,0 +1,64 @@
+/* Paleta personalizada */
+:root {
+  --primary-brand: #406D96;
+  --secondary-brand: #2F3A56;
+}
+
+/* Fondo navbar personalizado */
+.custom-navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0.8rem 1rem;
+}
+
+/* Marca (logo + texto) */
+.navbar-brand {
+  font-family: "Poppins", sans-serif;
+  color: var(--primary-brand);
+  text-decoration: none;
+}
+
+/* Color del texto principal */
+.text-brand {
+  color: var(--primary-brand);
+}
+
+/* Navegación */
+.nav-link {
+  color: var(--secondary-brand);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-brand);
+}
+
+/* Botones personalizados */
+.btn-brand {
+  background-color: var(--primary-brand);
+  color: white;
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.btn-brand:hover {
+  background-color: var(--secondary-brand);
+  color: #fff;
+}
+
+.btn-outline-brand {
+  border: 2px solid var(--primary-brand);
+  color: var(--primary-brand);
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-brand:hover {
+  background-color: var(--primary-brand);
+  color: white;
+}

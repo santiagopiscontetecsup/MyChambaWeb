@@ -2,12 +2,13 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import "@/components/header/styles/Avatar.css";
 import { avatarData } from "@/data/avatar/mockData";
 
 const Avatar: React.FC = () => {
   const router = useRouter();
-
+ 
   const goToProfile = () => router.push("/profile");
   const goToSettings = () => router.push("/settings");
   const goToLogin = () => router.push("/");
@@ -19,7 +20,13 @@ const Avatar: React.FC = () => {
         href="#"
         data-bs-toggle="dropdown"
       >
-        <img src={avatarData.image} alt="Profile" className="rounded-circle" />
+        <Image
+          src={avatarData.image}
+          alt="Profile"
+          width={avatarData.image.width}   // Aquí Next.js tiene los valores correctos
+          height={avatarData.image.height}
+          className="rounded-circle"
+        />
         <span className="d-none d-md-block dropdown-toggle ps-2">{avatarData.name}</span>
       </a>
 
