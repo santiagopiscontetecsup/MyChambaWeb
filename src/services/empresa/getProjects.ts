@@ -5,11 +5,12 @@ export const getProjectsByEmpresaId = async (
   idEmpresa: number
 ): Promise<ProyectoEmpresa[]> => {
   const token = localStorage.getItem("token");
-  const response = await api.get<ProyectoEmpresa[]>("/api/Proyectos", {
-    params: { idEmpresa },
+
+  const response = await api.get<ProyectoEmpresa[]>(`/api/Proyectos/${idEmpresa}`, {
     headers: {
       ...(token && { Authorization: `Bearer ${token}` }),
     },
   });
+
   return response.data;
 };
