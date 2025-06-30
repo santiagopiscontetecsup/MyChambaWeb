@@ -2,9 +2,7 @@ import api from "../api";
 
 export const fetchProyectos = async (idEmpresa: number) => {
   try {
-    const response = await api.get(`/api/Proyectos`, {
-      params: { idEmpresa },
-    });
+    const response = await api.get(`/api/Proyectos/${idEmpresa}`);
     return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -16,6 +14,7 @@ export const fetchProyectos = async (idEmpresa: number) => {
     throw error;
   }
 };
+
 
 export const publishProyecto = async (proyecto: unknown, token: string) => {
   try {

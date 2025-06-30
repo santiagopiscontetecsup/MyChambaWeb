@@ -1,0 +1,217 @@
+.content-landing {
+  background: transparent;
+  color: #000;
+}
+
+.clean-hero {
+  background: none;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.clean-img {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  color: #000;
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  color: #444;
+}
+
+.benefits-grid .col-6,
+.benefits-grid .col-12 {
+  font-size: 1rem;
+  color: #000;
+}
+
+.btn-work {
+  background-color: #406D96;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.btn-work:hover {
+  background-color: #2F3A56;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+.glass-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.quienes-somos-section {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.como-funciona-section {
+  background: linear-gradient(135deg, #2F3A56, #406D96);
+}
+
+/* Responsive ajustes */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .btn-work {
+    width: 100%;
+  }
+
+  .benefits-grid {
+    font-size: 0.95rem;
+  }
+}
+
+/* Íconos redondos */
+.benefit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(64, 109, 150, 0.1);
+  border: 2px solid #406D96;
+  color: #406D96;
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.benefit-icon:hover {
+  background-color: #406D96;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Cards empresa y estudiante */
+.company-card, .student-card {
+  border: none;
+  border-radius: 16px;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.company-card:hover,
+.student-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.company-card .card-body i,
+.student-card .card-body i {
+  display: inline-block;
+}
+
+/* ================= EQUIPO DE TRABAJO (DISEÑO HORIZONTAL) ================= */
+.equipo-section {
+  background-color: #f8f9fa;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.team-horizontal {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  transition: background 0.3s ease;
+}
+
+.team-horizontal:hover {
+  background-color: rgba(64, 109, 150, 0.05);
+}
+
+.team-avatar-horizontal {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #406D96;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 1rem;
+}
+
+.team-info {
+  flex: 1;
+}
+
+.team-info h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2F3A56;
+  margin-bottom: 0.25rem;
+}
+
+.team-info p {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .team-horizontal {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .team-avatar-horizontal {
+    width: 60px;
+    height: 60px;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .team-info h6 {
+    font-size: 0.95rem;
+  }
+
+  .team-info p {
+    font-size: 0.85rem;
+  }
+}
+
+.empresa-info-section {
+  border-top: 1px solid #e0e0e0;
+}
+
+.empresa-link {
+  color: #555;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.3s;
+}
+
+.empresa-link:hover {
+  color: #000;
+  text-decoration: underline;
+}

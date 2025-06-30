@@ -1,0 +1,9 @@
+.footer {
+  background-color: #2F3A56;
+  color: #ccc;
+}
+
+.footer small {
+  display: block;
+  margin-top: 0.5rem;
+}
