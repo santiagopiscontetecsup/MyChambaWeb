@@ -30,7 +30,7 @@ import api from "../api";
 
 export const fetchProyectos = async (idEmpresa: number) => {
   try {
-    const response = await api.get(`/api/Proyectos`, {
+    const response = await api.get(`/api/Proyectos/${idEmpresa}`, {
       params: { idEmpresa },
     });
     return response.data;
