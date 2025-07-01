@@ -215,3 +215,93 @@
   color: #000;
   text-decoration: underline;
 }
+
+/* Tamaño consistente para botones */
+.btn-equal {
+  min-width: 160px;
+  text-align: center;
+}
+
+/* Asegura buen espaciado en móvil */
+@media (max-width: 768px) {
+  .benefits-grid .col-6,
+  .benefits-grid .col-12 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .benefits-grid {
+    margin-bottom: 1rem;
+  }
+
+  .benefit-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .d-flex.align-items-center.gap-3.mt-4 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .btn-work,
+  .btn-outline-secondary {
+    width: 100%;
+  }
+}
+
+.benefits-grid .d-flex {
+  flex-wrap: nowrap;
+}
+
+.benefits-grid span {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+/* Ícono de beneficio: tamaño fijo y alineado */
+.benefit-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(64, 109, 150, 0.1);
+  border: 2px solid #406D96;
+  color: #406D96;
+  font-size: 1.1rem;
+  margin-right: 0.6rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.benefit-icon:hover {
+  background-color: #406D96;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* En móvil, asegurar espaciado vertical adecuado */
+@media (max-width: 576px) {
+  .benefits-grid .d-flex {
+    margin-bottom: 0.75rem;
+  }
+
+  .benefit-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    font-size: 1rem;
+  }
+
+  .benefits-grid span {
+    font-size: 0.9rem;
+  }
+}

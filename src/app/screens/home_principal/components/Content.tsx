@@ -49,9 +49,9 @@ export const Content: React.FC = () => {
               todo mientras trabajas desde casa.
             </p>
 
-            <div className="d-flex align-items-center gap-3 mt-4">
-              <a href="#trabajar" className="btn btn-work">Quiero trabajar</a>
-              <a href="#contratar" className="btn btn-outline-secondary fw-semibold">¿Quieres contratar?</a>
+            <div className="d-flex align-items-center gap-3 mt-4 flex-wrap">
+              <a href="#trabajar" className="btn btn-work btn-equal">Quiero trabajar</a>
+              <a href="#contratar" className="btn btn-outline-secondary fw-semibold btn-equal">¿Quieres contratar?</a>
             </div>
           </div>
 

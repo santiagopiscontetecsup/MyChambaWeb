@@ -8,7 +8,7 @@ export const Header: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleNavbar = () => setIsCollapsed(!isCollapsed);
-  const closeNavbar = () => setIsCollapsed(true); // <- esta función cierra el menú
+  const closeNavbar = () => setIsCollapsed(true); 
 
   return (
     <header className="navbar navbar-expand-lg shadow-sm sticky-top custom-navbar">
@@ -56,13 +56,14 @@ export const Header: React.FC = () => {
           </ul>
 
           <div className="d-lg-flex align-items-center mt-3 mt-lg-0">
-            <a href="/register" className="btn btn-outline-brand me-2 mb-2 mb-lg-0" onClick={closeNavbar}>
+            <a href="/register" className="btn btn-outline-brand auth-btn me-2" onClick={closeNavbar}>
               Registrarse
             </a>
-            <a href="/login" className="btn btn-brand" onClick={closeNavbar}>
+            <a href="/login" className="btn btn-brand auth-btn" onClick={closeNavbar}>
               Iniciar sesión
             </a>
           </div>
+
         </div>
       </div>
     </header>
