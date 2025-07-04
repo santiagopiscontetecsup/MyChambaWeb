@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
   const [empresaNombre, setEmpresaNombre] = useState("Empresa");
   const [ruc, setRuc] = useState("");
   const [logo, setLogo] = useState("");
-  const [background, setBackground] = useState(backgroundDefault.src);
+  const background = backgroundDefault.src;
 
   const goToLogin = () => router.push("/");
 
