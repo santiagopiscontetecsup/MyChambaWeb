@@ -49,7 +49,7 @@ const SobreMi: React.FC = () => {
         telefono: telefono || "",
         direccion: direccion || "",
         ruc,
-        logo: "",
+        logo: "logo.png",
         idSector: Number(idSector),
       },
     };
