@@ -1,3 +1,152 @@
+// "use client";
+
+// import React, { useState, useEffect } from "react";
+// import { useRouter } from "next/navigation";
+// import { registerEmpresa, RegisterEmpresaDTO } from "@/services/register/registerService";
+// import "../styles/sobremi.css";
+
+// const sectores = [
+//   { id: 1, nombre: "Tecnología" },
+// ];
+
+// const SobreMi: React.FC = () => {
+//   const router = useRouter();
+
+//   const [nombre, setNombre] = useState("");
+//   const [telefono, setTelefono] = useState("");
+//   const [direccion, setDireccion] = useState("");
+//   const [ruc, setRuc] = useState("");
+//   const [idSector, setIdSector] = useState<number | "">("");
+//   const [errors, setErrors] = useState<{ [k: string]: string }>({});
+//   const [loading, setLoading] = useState(false);
+
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   useEffect(() => {
+//     setEmail(sessionStorage.getItem("regEmail") || "");
+//     setPassword(sessionStorage.getItem("regPassword") || "");
+//   }, []);
+
+//   const validate = () => {
+//     const errs: typeof errors = {};
+//     if (!nombre) errs.nombre = "El nombre es obligatorio.";
+//     if (!ruc) errs.ruc = "El RUC es obligatorio.";
+//     else if (!/^[0-9]+$/.test(ruc)) errs.ruc = "Solo números.";
+//     if (idSector === "") errs.idSector = "Selecciona un sector.";
+//     setErrors(errs);
+//     return Object.keys(errs).length === 0;
+//   };
+
+//   const handleFinalize = async () => {
+//     if (!validate()) return;
+
+//     const payload: RegisterEmpresaDTO = {
+//       email,
+//       password,
+//       empresa: {
+//         nombre,
+//         telefono: telefono || "",
+//         direccion: direccion || "",
+//         ruc,
+//         logo: "logo.png",
+//         idSector: Number(idSector),
+//       },
+//     };
+
+//     try {
+//       setLoading(true);
+//       await registerEmpresa(payload);
+//       sessionStorage.removeItem("regEmail");
+//       sessionStorage.removeItem("regPassword");
+//       router.push("/");
+//     } catch {
+//       setErrors({ general: "Error al registrar. Intenta de nuevo." });
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <section className="sobremi-page d-flex justify-content-center align-items-center py-5">
+//       <form className="sobremi-form animate__animated animate__fadeIn">
+//         <h2 className="text-center fw-bold mb-4">Cuéntanos sobre tu empresa</h2>
+//         {errors.general && <div className="alert alert-danger">{errors.general}</div>}
+
+//         <div className="mb-3">
+//           <label className="form-label">Nombre de la empresa</label>
+//           <input
+//             type="text"
+//             className={`form-control ${errors.nombre ? "is-invalid" : ""}`}
+//             value={nombre}
+//             onChange={(e) => setNombre(e.target.value)}
+//           />
+//           {errors.nombre && <div className="invalid-feedback">{errors.nombre}</div>}
+//         </div>
+
+//         <div className="mb-3">
+//           <label className="form-label">Teléfono</label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             value={telefono}
+//             onChange={(e) => setTelefono(e.target.value)}
+//           />
+//         </div>
+
+//         <div className="mb-3">
+//           <label className="form-label">Dirección</label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             value={direccion}
+//             onChange={(e) => setDireccion(e.target.value)}
+//           />
+//         </div>
+
+//         <div className="mb-3">
+//           <label className="form-label">Sector</label>
+//           <select
+//             className={`form-select ${errors.idSector ? "is-invalid" : ""}`}
+//             value={idSector ?? ""}
+//             onChange={(e) => setIdSector(e.target.value === "" ? "" : parseInt(e.target.value))}
+//           >
+//             <option value="">Selecciona un sector</option>
+//             {sectores.map((s) => (
+//               <option key={s.id} value={s.id}>
+//                 {s.nombre}
+//               </option>
+//             ))}
+//           </select>
+//           {errors.idSector && <div className="invalid-feedback">{errors.idSector}</div>}
+//         </div>
+
+//         <div className="mb-3">
+//           <label className="form-label">RUC</label>
+//           <input
+//             type="text"
+//             className={`form-control ${errors.ruc ? "is-invalid" : ""}`}
+//             value={ruc}
+//             onChange={(e) => setRuc(e.target.value)}
+//           />
+//           {errors.ruc && <div className="invalid-feedback">{errors.ruc}</div>}
+//         </div>
+
+//         <button
+//           type="button"
+//           className="btn btn-primary w-100"
+//           onClick={handleFinalize}
+//           disabled={loading}
+//         >
+//           {loading ? "Registrando..." : "Finalizar registro"}
+//         </button>
+//       </form>
+//     </section>
+//   );
+// };
+
+// export default SobreMi;
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -30,10 +179,31 @@ const SobreMi: React.FC = () => {
 
   const validate = () => {
     const errs: typeof errors = {};
+
     if (!nombre) errs.nombre = "El nombre es obligatorio.";
-    if (!ruc) errs.ruc = "El RUC es obligatorio.";
-    else if (!/^[0-9]+$/.test(ruc)) errs.ruc = "Solo números.";
-    if (idSector === "") errs.idSector = "Selecciona un sector.";
+
+    if (!telefono) {
+      errs.telefono = "El teléfono es obligatorio.";
+    } else if (!/^\d+$/.test(telefono)) {
+      errs.telefono = "Solo se permiten números.";
+    } else if (telefono.length !== 9) {
+      errs.telefono = "El teléfono debe tener 9 dígitos.";
+    }
+
+    if (!ruc) {
+      errs.ruc = "El RUC es obligatorio.";
+    } else if (!/^\d+$/.test(ruc)) {
+      errs.ruc = "Solo se permiten números.";
+    } else if (!ruc.startsWith("20")) {
+      errs.ruc = "El RUC debe comenzar con 20.";
+    } else if (ruc.length !== 11) {
+      errs.ruc = "El RUC debe tener 11 dígitos.";
+    }
+
+    if (idSector === "") {
+      errs.idSector = "Selecciona un sector.";
+    }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -46,8 +216,8 @@ const SobreMi: React.FC = () => {
       password,
       empresa: {
         nombre,
-        telefono: telefono || "",
-        direccion: direccion || "",
+        telefono,
+        direccion,
         ruc,
         logo: "logo.png",
         idSector: Number(idSector),
@@ -88,10 +258,17 @@ const SobreMi: React.FC = () => {
           <label className="form-label">Teléfono</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${errors.telefono ? "is-invalid" : ""}`}
             value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
+            maxLength={9}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^\d*$/.test(value)) {
+                setTelefono(value);
+              }
+            }}
           />
+          {errors.telefono && <div className="invalid-feedback">{errors.telefono}</div>}
         </div>
 
         <div className="mb-3">
@@ -128,6 +305,7 @@ const SobreMi: React.FC = () => {
             className={`form-control ${errors.ruc ? "is-invalid" : ""}`}
             value={ruc}
             onChange={(e) => setRuc(e.target.value)}
+            maxLength={11}
           />
           {errors.ruc && <div className="invalid-feedback">{errors.ruc}</div>}
         </div>
@@ -146,6 +324,3 @@ const SobreMi: React.FC = () => {
 };
 
 export default SobreMi;
-
-
-

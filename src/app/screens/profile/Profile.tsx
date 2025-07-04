@@ -257,7 +257,6 @@ const Profile: React.FC = () => {
     fetchData();
   }, []);
 
-  // ✅ Validación del logo seguro
   const getEmpresaLogo = () => {
     const logo = empresaInfo?.logo?.trim();
     if (!logo) return avatar;
@@ -291,7 +290,8 @@ const Profile: React.FC = () => {
         </div>
       </div>
 
-      <div className="text-center mt-5">
+      {/* 🔧 Margen ajustado entre logo y nombre */}
+      <div className="text-center" style={{ marginTop: "70px" }}>
         <h3>{empresaInfo?.nombre || "Nombre de empresa"}</h3>
         <p className="text-muted">RUC: {empresaInfo?.ruc || "Sin RUC"}</p>
       </div>
