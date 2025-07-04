@@ -22,11 +22,21 @@ interface ProjectCard {
   members: number;
 }
 
+interface EmpresaInfo {
+  idUsuario: number;
+  nombre: string;
+  telefono: string;
+  direccion: string;
+  ruc: string;
+  logo: string;
+  sector: string;
+}
+
 const Profile: React.FC = () => {
   const router = useRouter();
 
   const [projects, setProjects] = useState<ProjectCard[]>([]);
-  const [empresaInfo, setEmpresaInfo] = useState<any>(null);
+  const [empresaInfo, setEmpresaInfo] = useState<EmpresaInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
   const handleClick = () => {
@@ -167,4 +177,3 @@ const Profile: React.FC = () => {
 };
 
 export default Profile;
-
