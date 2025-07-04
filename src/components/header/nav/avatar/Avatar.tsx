@@ -1,17 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "@/components/header/styles/Avatar.css";
-import { avatarData } from "@/data/avatar/mockData";
+import { getUserFromToken } from "@/services/auth/authService";
+import { getEmpresaByIdEmpresa } from "@/services/empresa/getData";
+import avatarDefault from "@/assets/avatar.jpg";
 
 const Avatar: React.FC = () => {
   const router = useRouter();
- 
+  const [empresaNombre, setEmpresaNombre] = useState("Empresa");
+
   const goToProfile = () => router.push("/profile");
   const goToSettings = () => router.push("/settings");
   const goToLogin = () => router.push("/");
+
+  useEffect(() => {
+    const fetchEmpresaInfo = async () => {
+      const user = getUserFromToken();
+      const idEmpresa = user?.idEmpresa;
+
+      if (!idEmpresa) {
+        console.warn("idEmpresa no encontrado en el token.");
+        return;
+      }
+
+      try {
+        const empresa = await getEmpresaByIdEmpresa(idEmpresa);
+        setEmpresaNombre(empresa?.nombre || "Empresa");
+      } catch (error) {
+        console.error("Error al obtener datos de la empresa:", error);
+      }
+    };
+
+    fetchEmpresaInfo();
+  }, []);
 
   return (
     <li className="nav-item dropdown pe-3">
@@ -21,19 +45,19 @@ const Avatar: React.FC = () => {
         data-bs-toggle="dropdown"
       >
         <Image
-          src={avatarData.image}
+          src={avatarDefault}
           alt="Profile"
-          width={avatarData.image.width}   // Aquí Next.js tiene los valores correctos
-          height={avatarData.image.height}
+          width={40}
+          height={40}
           className="rounded-circle"
         />
-        <span className="d-none d-md-block dropdown-toggle ps-2">{avatarData.name}</span>
+        <span className="d-none d-md-block dropdown-toggle ps-2">{empresaNombre}</span>
       </a>
 
       <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li className="dropdown-header">
-          <h6>{avatarData.name}</h6>
-          <span>{avatarData.role}</span>
+          <h6>{empresaNombre}</h6>
+          <span>Empresa</span>
         </li>
 
         <li><hr className="dropdown-divider" /></li>

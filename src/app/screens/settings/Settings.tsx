@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { userProfile } from "@/data/profile/mockData";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   FaEdit,
@@ -12,36 +11,65 @@ import {
   FaMoon,
   FaInfoCircle,
 } from "react-icons/fa";
-import "./styles/settings.css"; 
+import "./styles/settings.css";
 import { useRouter } from "next/navigation";
-
+import avatarDefault from "@/assets/avatar.jpg";
+import backgroundDefault from "@/assets/img/fondo.jpg";
+import { getUserFromToken } from "@/services/auth/authService";
+import { getEmpresaByIdEmpresa } from "@/services/empresa/getData";
 
 const Settings: React.FC = () => {
   const router = useRouter();
+  const [empresaNombre, setEmpresaNombre] = useState("Empresa");
+  const [ruc, setRuc] = useState("");
+  const [logo, setLogo] = useState("");
+  const [background, setBackground] = useState(backgroundDefault.src);
 
   const goToLogin = () => router.push("/");
 
+  useEffect(() => {
+    const fetchEmpresa = async () => {
+      const user = getUserFromToken();
+      const idEmpresa = user?.idEmpresa;
+
+      if (!idEmpresa) {
+        console.warn("idEmpresa no encontrado en el token.");
+        return;
+      }
+
+      try {
+        const empresa = await getEmpresaByIdEmpresa(idEmpresa);
+        setEmpresaNombre(empresa?.nombre || "Empresa");
+        setRuc(empresa?.ruc || "");
+        setLogo(empresa?.logo || "");
+      } catch (error) {
+        console.error("Error al obtener datos de la empresa:", error);
+      }
+    };
+
+    fetchEmpresa();
+  }, []);
+
   return (
     <div className="settings-container">
-      {/* Card de perfil */}
       <div className="profile-card">
         <div
           className="profile-banner"
           style={{
-            backgroundImage: `url(${userProfile.backgroundImage})`,
+            backgroundImage: `url(${background})`,
           }}
         >
           <div className="profile-info">
             <Image
-              src={userProfile.profileImage}
+              src={logo || avatarDefault}
               alt="Profile"
               width={80}
               height={80}
               className="profile-avatar"
             />
             <div>
-              <h4 className="profile-name">{userProfile.name}</h4>
-              <small className="profile-role">{userProfile.role}</small>
+              <h4 className="profile-name">{empresaNombre}</h4>
+              <small className="profile-role">{ruc}</small>
             </div>
           </div>
         </div>

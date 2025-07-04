@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getProjectsByEmpresaId } from "@/services/empresa/getProjects";
 import { getUserFromToken } from "@/services/auth/authService";
 import Cards from "@/components/cards/Cards";
-import avatar from "@/assets/avatar.jpg";
+import avatar from "@/assets/image.png";
 
 import { ProyectoEmpresa } from "@/models/proyectoEmpresa";
 import { Project } from "@/data/projects/mockData";

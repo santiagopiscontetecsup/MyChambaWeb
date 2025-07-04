@@ -358,7 +358,7 @@ const ChallengeForm: React.FC<ChallengeFormProps> = ({ onSubmit }) => {
 
       <div className="checkbox-group">
         <p className="checkbox-group-title">Seleccionar habilidades</p>
-        {[{ id: 1, label: 'Java' }, { id: 2, label: 'Python' }, { id: 3, label: 'JavaScript' }, { id: 4, label: 'React' }]
+        {[{ id: 1, label: 'Java' }, { id: 2, label: 'Python' }]
           .map(h => (
             <label key={h.id} className="checkbox-label">
               <input

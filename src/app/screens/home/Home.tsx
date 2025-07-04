@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import './styles/home.css';
 import Card from "@/components/cards/Cards";
-import avatar from "@/assets/avatar.jpg";
+import avatar from "@/assets/image.png";
 
 import { getProjectsByEmpresaId } from "@/services/empresa/getProjects";
 import { getUserFromToken } from "@/services/auth/authService";

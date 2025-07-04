@@ -1,7 +1,7 @@
-import profileImg from "@/assets/avatar.jpg";
+import profileImg from "@/assets/image.png";
 
 export const avatarData = {
-  name: "PisconteDev",
-  role: "Video Game Developer",
+  name: "Pro Avance SAC",
+  role: "Owner",
   image: profileImg,
 };

@@ -3,7 +3,7 @@
 import React from 'react';
 
 import '@/components/header/styles/Logo.css';
-import profileImg from "@/assets/logo.jpg";
+import profileImg from "@/assets/logo.png";
 import Image from "next/image";
 
 const Logo: React.FC = () => {

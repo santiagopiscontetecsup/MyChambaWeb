@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "@/components/cards/styles/cards.css";
 import { Project } from "@/data/projects/mockData";
-import avatar from "@/assets/avatar.jpg";
+import avatar from "@/assets/image.png";
 
 interface Props {
   card: Project;
@@ -32,7 +32,7 @@ const Card: React.FC<Props> = ({ card }) => {
             />
             <div>
               <h5 className="card-title mb-0">{card.title || "Sin título"}</h5>
-              <small className="text-muted">Empresa: PisconteDev</small>
+              <small className="text-muted">Empresa: Pro Avance SAC</small>
             </div>
           </div>
 

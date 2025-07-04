@@ -78,7 +78,7 @@
 import React, { useState } from "react";
 import "@/components/cards/styles/cards.css";
 import Image from "next/image";
-import avatar from "@/assets/avatar.jpg";
+import avatar from "@/assets/image.png";
 import { aceptarPostulante } from "@/services/empresa/postApplicants";
 import { useRouter } from "next/navigation";
 
