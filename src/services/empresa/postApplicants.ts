@@ -2,7 +2,7 @@ import api from "../api";
 
 export const aceptarPostulante = async (idSolicitud: number) => {
   try {
-    const response = await api.post(`/api/Postulantes/aceptar/${idSolicitud}`, null, {
+    const response = await api.put(`/api/Postulantes/solicitud/${idSolicitud}/aceptar`, null, {
       headers: {
       },
     });
